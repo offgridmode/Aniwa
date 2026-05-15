@@ -1,0 +1,10 @@
+Metadata-Version: 2.4
+Name: aniwa
+Version: 0.1.0
+Summary: Universal dataset profiling and intelligence tool
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: typer>=0.12.0
+Requires-Dist: rich>=13.0.0
+Requires-Dist: polars>=1.0.0
+Requires-Dist: pydantic>=2.0.0

@@ -1,0 +1,6 @@
+customer_id,name,email,country,revenue
+1,Ama,ama@example.com,Ghana,120
+2,Kofi,kofi@example.com,Ghana,250
+3,Akosua,,Ghana,300
+4,Yaw,yaw@example.com,Nigeria,150
+4,Yaw,yaw@example.com,Nigeria,150
