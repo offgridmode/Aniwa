@@ -1,7 +1,11 @@
 # Aniwa
 
 <p align="left">
-  <img src="assets/aniwa-logo.png" width="400" alt="Aniwa Logo">
+  <img
+    src="https://raw.githubusercontent.com/ReginaldErzoah/Aniwa/main/assets/aniwa-logo.png"
+    width="220"
+    alt="Aniwa Logo"
+  >
 </p>
 
 > **See your data clearly.**
