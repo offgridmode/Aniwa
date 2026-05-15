@@ -1,2 +1,0 @@
-[console_scripts]
-aniwa = aniwa.cli:app
