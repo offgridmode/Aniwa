@@ -101,28 +101,140 @@ def generate_insights(
         )
 
     for col in columns:
-        if col.null_percent > 50:
+        column_name = col.name.lower()
+
+        #
+        # High null percentage
+        #
+        if col.null_percent >= 75:
             insights.append(
                 Insight(
                     level="critical",
-                    message=f"Column '{col.name}' is highly sparse with {col.null_percent}% nulls.",
+                    message=(
+                        f"Column '{col.name}' is extremely sparse "
+                        f"with {col.null_percent}% null values."
+                    ),
                 )
             )
 
-        if col.unique_count == total_rows and total_rows > 0:
+        elif col.null_percent >= 40:
             insights.append(
                 Insight(
-                    level="info",
-                    message=f"Column '{col.name}' may be a unique identifier.",
+                    level="warning",
+                    message=(
+                        f"Column '{col.name}' contains "
+                        f"{col.null_percent}% null values."
+                    ),
                 )
             )
 
+        #
+        # Constant columns
+        #
         if col.unique_count == 1:
             insights.append(
                 Insight(
                     level="warning",
-                    message=f"Column '{col.name}' has only one unique value.",
+                    message=(
+                        f"Column '{col.name}' contains only one unique value."
+                    ),
                 )
             )
+
+        #
+        # Possible unique identifiers
+        #
+        if (
+            col.unique_count == total_rows
+            and total_rows > 0
+            and "name" not in column_name
+        ):
+            insights.append(
+                Insight(
+                    level="info",
+                    message=(
+                        f"Column '{col.name}' may be a unique identifier."
+                    ),
+                )
+            )
+
+        #
+        # High cardinality detection
+        #
+        if total_rows > 0:
+            cardinality_ratio = col.unique_count / total_rows
+
+            if cardinality_ratio >= 0.9 and total_rows > 20:
+                insights.append(
+                    Insight(
+                        level="info",
+                        message=(
+                            f"Column '{col.name}' has very high cardinality."
+                        ),
+                    )
+                )
+
+        #
+        # Potential PII detection
+        #
+        pii_keywords = [
+            "email",
+            "phone",
+            "mobile",
+            "ssn",
+            "passport",
+            "card",
+            "credit",
+            "address",
+        ]
+
+        if any(keyword in column_name for keyword in pii_keywords):
+            insights.append(
+                Insight(
+                    level="warning",
+                    message=(
+                        f"Column '{col.name}' may contain sensitive information."
+                    ),
+                )
+            )
+
+        #
+        # Numeric statistics insights
+        #
+        if col.numeric_stats:
+            stats = col.numeric_stats
+
+            #
+            # Negative values
+            #
+            if stats.min is not None and stats.min < 0:
+                insights.append(
+                    Insight(
+                        level="info",
+                        message=(
+                            f"Column '{col.name}' contains negative values."
+                        ),
+                    )
+                )
+
+            #
+            # Large spread detection
+            #
+            if (
+                stats.mean is not None
+                and stats.std is not None
+                and stats.mean != 0
+            ):
+                variability_ratio = abs(stats.std / stats.mean)
+
+                if variability_ratio > 2:
+                    insights.append(
+                        Insight(
+                            level="info",
+                            message=(
+                                f"Column '{col.name}' shows high variability."
+                            ),
+                        )
+                    )
 
     return insights
