@@ -42,6 +42,68 @@ Aniwa makes answering those questions simple.
 
 ---
 
+# Quick Installation
+
+Install Aniwa from PyPI:
+
+```bash
+pip install aniwa
+````
+
+Verify installation:
+
+```bash
+aniwa --help
+```
+
+---
+
+# Quick Start
+
+Profile a dataset:
+
+```bash
+aniwa customers.csv
+```
+
+Generate a JSON report:
+
+```bash
+aniwa customers.csv --report json --output profile.json
+```
+
+Generate an HTML report:
+
+```bash
+aniwa customers.csv --report html --output profile.html
+```
+
+Run lightweight profiling:
+
+```bash
+aniwa customers.csv --mode fast
+```
+
+Run full profiling:
+
+```bash
+aniwa customers.csv --mode deep
+```
+
+---
+
+# Supported Formats
+
+Aniwa currently supports:
+
+* CSV
+* Excel (.xlsx)
+* JSON
+* Parquet
+
+
+---
+
 # Features
 
 ## Universal Dataset Support
@@ -241,25 +303,25 @@ Aniwa/
 
 # Roadmap
 
-## v0.1.0 - MVP Foundation
+## v0.1.1 - MVP Foundation
 
 ### Core Features
-- CSV support
-- Excel support
-- JSON support
-- Parquet support
-- schema profiling
-- null analysis
-- duplicate detection
-- statistical profiling
-- console reports
-- JSON export
-- HTML reports
+[x] CSV support
+[x] Excel support
+[x] JSON support
+[x] Parquet support
+[x] schema profiling
+[x] null analysis
+[x] duplicate detection
+[x] statistical profiling
+[x] console reports
+[x] JSON export
+[x] HTML reports
 
 ### Developer Experience
-- Rich terminal UI
-- fast and deep modes
-- profiling insights
+[x] Rich terminal UI
+[x] fast and deep modes
+[x] profiling insights
 
 ---
 
