@@ -56,6 +56,12 @@ Verify installation:
 aniwa --help
 ```
 
+Upgrade Aniwa:
+
+```bash
+pip install --upgrade aniwa
+```
+
 ---
 
 # Quick Start
