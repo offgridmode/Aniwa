@@ -60,6 +60,25 @@ def test_read_excel(tmp_path):
     assert df.columns == ["id", "name"]
 
 
+def test_read_xls_dispatches_to_excel_reader(tmp_path, monkeypatch):
+    file_path = tmp_path / "customers.xls"
+    file_path.write_text("fake excel content", encoding="utf-8")
+
+    called = {"value": False}
+
+    def fake_read_excel(path):
+        called["value"] = True
+        return pl.DataFrame({"id": [1], "name": ["Ama"]})
+
+    monkeypatch.setattr(pl, "read_excel", fake_read_excel)
+
+    df = read_dataset(str(file_path))
+
+    assert called["value"] is True
+    assert df.shape == (1, 2)
+    assert df.columns == ["id", "name"]
+
+
 def test_unsupported_file_type(tmp_path):
     file_path = tmp_path / "customers.txt"
     file_path.write_text("id,name\n1,Ama\n", encoding="utf-8")

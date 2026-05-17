@@ -103,7 +103,7 @@ aniwa customers.csv --mode deep
 Aniwa currently supports:
 
 * CSV
-* Excel (.xlsx)
+* Excel (.xlsx,.xls)
 * JSON
 * Parquet
 
@@ -312,22 +312,22 @@ Aniwa/
 ## v0.1.1 - MVP Foundation
 
 ### Core Features
-[x] CSV support
-[x] Excel support
-[x] JSON support
-[x] Parquet support
-[x] schema profiling
-[x] null analysis
-[x] duplicate detection
-[x] statistical profiling
-[x] console reports
-[x] JSON export
-[x] HTML reports
+- [x] CSV support
+- [x] Excel support
+- [x] JSON support
+- [x] Parquet support
+- [x] schema profiling
+- [x] null analysis
+- [x] duplicate detection
+- [x] statistical profiling
+- [x] console reports
+- [x] JSON export
+- [x] HTML reports
 
 ### Developer Experience
-[x] Rich terminal UI
-[x] fast and deep modes
-[x] profiling insights
+- [x] Rich terminal UI
+- [x] fast and deep modes
+- [x] profiling insights
 
 ---
 
