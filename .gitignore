@@ -34,7 +34,3 @@ Thumbs.db
 !.vscode/settings.json
 
 .idea/
-
-# Generated reports
-*.html
-*.json
