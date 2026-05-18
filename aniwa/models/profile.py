@@ -34,7 +34,7 @@ class Insight(BaseModel):
 
 
 class DatasetProfile(BaseModel):
-    summary: DatasetSummary
-    columns: list[ColumnProfile]
-    quality: QualityProfile
-    insights: list[Insight]
+    summary: DatasetSummary | None = None
+    columns: list[ColumnProfile] | None = None
+    quality: QualityProfile | None = None
+    insights: list[Insight] | None = None
