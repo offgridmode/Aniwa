@@ -84,6 +84,11 @@ Generate an HTML report:
 aniwa customers.csv --report html --output profile.html
 ```
 
+Generate a Markdown report:
+```bash
+aniwa customers.csv --report markdown --output profile.md
+```
+
 Run lightweight profiling:
 
 ```bash
@@ -178,6 +183,10 @@ Machine-readable profiling results.
 ### HTML Reports
 
 Generate shareable profiling reports for teams, audits, and debugging workflows.
+
+### Markdown Reports
+
+Generate readable Markdown reports perfect for documentation and GitHub issues.
 
 ---
 
@@ -323,6 +332,7 @@ Aniwa/
 - [x] console reports
 - [x] JSON export
 - [x] HTML reports
+- [x] Markdown reports
 
 ### Developer Experience
 - [x] Rich terminal UI
@@ -333,7 +343,6 @@ Aniwa/
 
 ## v0.1.2 - More Outputs & File Supports
 
-- Markdown report
 - CSV summary report
 - PDF report
 - Excel report
