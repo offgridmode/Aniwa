@@ -9,6 +9,7 @@ from aniwa.reports.console import render_console_report
 from aniwa.reports.html_report import render_html_report
 from aniwa.reports.json_report import render_json_report
 from aniwa.reports.excel_report import render_excel_report
+from aniwa.reports.markdown_report import render_markdown_report
 from aniwa.models.enums import ReportSection
 
 app = typer.Typer(help="Aniwa — Universal dataset profiling and intelligence.")
@@ -19,6 +20,7 @@ class ReportFormat(str, Enum):
     json = "json"
     html = "html"
     excel = "excel"
+    markdown = "markdown"
 
 
 class ProfileMode(str, Enum):
@@ -130,3 +132,11 @@ def profile(
         render_excel_report(dataset_profile, output)
         typer.echo(f"Excel report written to {output}")
         return
+    
+    if report == ReportFormat.markdown:
+        markdown_output = render_markdown_report(dataset_profile, output)
+
+        if output:
+            typer.echo(f"Markdown report written to {output}")
+        else:
+            typer.echo(markdown_output)
