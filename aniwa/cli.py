@@ -5,12 +5,14 @@ import typer
 
 from aniwa.core.profiler import profile_dataframe
 from aniwa.io.readers import read_dataset
+from aniwa.models.enums import ReportSection
 from aniwa.reports.console import render_console_report
+from aniwa.reports.excel_report import render_excel_report
 from aniwa.reports.html_report import render_html_report
 from aniwa.reports.json_report import render_json_report
-from aniwa.reports.excel_report import render_excel_report
 from aniwa.reports.markdown_report import render_markdown_report
-from aniwa.models.enums import ReportSection
+from aniwa.reports.pdf_report import render_pdf_report
+
 
 app = typer.Typer(help="Aniwa — Universal dataset profiling and intelligence.")
 
@@ -21,33 +23,42 @@ class ReportFormat(str, Enum):
     html = "html"
     excel = "excel"
     markdown = "markdown"
+    pdf = "pdf"
 
 
 class ProfileMode(str, Enum):
     fast = "fast"
     deep = "deep"
 
+
 def validate_sections(value: str | None) -> list[str] | None:
     if not value:
         return None
 
     split_sections = [item.strip() for item in value.split(",")]
-    valid_options = [e.value for e in ReportSection]
+    valid_options = [section.value for section in ReportSection]
 
-    for sec in split_sections:
-        if sec not in valid_options:
-            raise typer.BadParameter(f"Invalid report section: {sec}. Valid options are: {', '.join(valid_options)}.")
+    for section in split_sections:
+        if section not in valid_options:
+            raise typer.BadParameter(
+                f"Invalid report section: {section}. "
+                f"Valid options are: {', '.join(valid_options)}."
+            )
 
     return split_sections
 
-def resolve_sections(include: str | None,exclude: str | None,) -> set[ReportSection]:
+
+def resolve_sections(
+    include: str | None,
+    exclude: str | None,
+) -> set[ReportSection]:
     include_sections = validate_sections(include)
     exclude_sections = validate_sections(exclude)
 
     if include_sections and exclude_sections:
         raise typer.BadParameter("Use either --include or --exclude, not both.")
 
-    all_sections = {section for section in ReportSection}
+    all_sections = set(ReportSection)
 
     if include_sections:
         return {ReportSection(section) for section in include_sections}
@@ -56,6 +67,7 @@ def resolve_sections(include: str | None,exclude: str | None,) -> set[ReportSect
         return all_sections - {ReportSection(section) for section in exclude_sections}
 
     return all_sections
+
 
 @app.command()
 def profile(
@@ -89,7 +101,7 @@ def profile(
         "--exclude",
         "-e",
         help="Comma-separated list of report sections to exclude.",
-    )
+    ),
 ):
     """
     Profile a dataset.
@@ -129,10 +141,11 @@ def profile(
     if report == ReportFormat.excel:
         if output is None:
             output = "aniwa_report.xlsx"
+
         render_excel_report(dataset_profile, output)
         typer.echo(f"Excel report written to {output}")
         return
-    
+
     if report == ReportFormat.markdown:
         markdown_output = render_markdown_report(dataset_profile, output)
 
@@ -140,3 +153,13 @@ def profile(
             typer.echo(f"Markdown report written to {output}")
         else:
             typer.echo(markdown_output)
+
+        return
+
+    if report == ReportFormat.pdf:
+        if output is None:
+            output = "aniwa_report.pdf"
+
+        render_pdf_report(dataset_profile, output)
+        typer.echo(f"PDF report written to {output}")
+        return

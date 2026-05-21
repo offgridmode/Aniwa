@@ -24,6 +24,12 @@ Whether you're working with CSV files, Excel spreadsheets, JSON datasets, or Par
 
 ---
 
+## Current Version
+
+Version 0.1.1
+
+---
+
 # Why Aniwa?
 
 Data professionals constantly work with unknown datasets.
