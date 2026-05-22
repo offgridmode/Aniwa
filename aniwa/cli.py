@@ -1,9 +1,11 @@
 import platform
+import sys
 import time
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
 
+import polars as pl
 import typer
 
 from aniwa import __version__
@@ -87,10 +89,44 @@ def format_file_size(size_bytes: int) -> str:
     return f"{size_bytes / 1024**3:.2f} GB"
 
 
+def build_command_used(
+    path: str,
+    report: ReportFormat,
+    output: str | None,
+    mode: ProfileMode,
+    include: str | None,
+    exclude: str | None,
+    template: str,
+) -> str:
+    command_parts = ["aniwa", path]
+
+    if report != ReportFormat.console:
+        command_parts.extend(["--report", report.value])
+
+    if output:
+        command_parts.extend(["--output", output])
+
+    if mode != ProfileMode.deep:
+        command_parts.extend(["--mode", mode.value])
+
+    if include:
+        command_parts.extend(["--include", include])
+
+    if exclude:
+        command_parts.extend(["--exclude", exclude])
+
+    if report in {ReportFormat.html, ReportFormat.pdf} and template != "default":
+        command_parts.extend(["--template", template])
+
+    return " ".join(command_parts)
+
+
 def build_profile_metadata(
     dataset_path: Path,
+    path: str,
     mode: ProfileMode,
     report: ReportFormat,
+    output: str | None,
     template: str,
     sections: set[ReportSection],
     include: str | None,
@@ -104,6 +140,8 @@ def build_profile_metadata(
         generated_at=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
         aniwa_version=__version__,
         python_version=platform.python_version(),
+        operating_system=f"{platform.system()} {platform.release()}",
+        polars_version=pl.__version__,
         dataset_path=str(dataset_path),
         dataset_file_type=dataset_path.suffix.lower().lstrip(".").upper(),
         dataset_size=format_file_size(dataset_path.stat().st_size),
@@ -113,6 +151,15 @@ def build_profile_metadata(
         included_sections=include_sections or sorted(section.value for section in sections),
         excluded_sections=exclude_sections,
         profiling_duration=f"{duration_seconds:.2f}s",
+        command_used=build_command_used(
+            path=path,
+            report=report,
+            output=output,
+            mode=mode,
+            include=include,
+            exclude=exclude,
+            template=template,
+        ),
     )
 
 
@@ -175,8 +222,10 @@ def profile(
 
     dataset_profile.metadata = build_profile_metadata(
         dataset_path=dataset_path,
+        path=path,
         mode=mode,
         report=report,
+        output=output,
         template=template,
         sections=sections,
         include=include,
