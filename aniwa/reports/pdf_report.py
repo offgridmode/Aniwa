@@ -4,6 +4,7 @@ from reportlab.lib import colors
 from reportlab.lib.pagesizes import landscape, letter
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import (
+    Image,
     Paragraph,
     SimpleDocTemplate,
     Spacer,
@@ -11,6 +12,11 @@ from reportlab.platypus import (
     TableStyle,
 )
 
+from aniwa.charts.pdf_charts import (
+    generate_cardinality_chart,
+    generate_duplicate_chart,
+    generate_null_chart,
+)
 from aniwa.models.profile import DatasetProfile
 
 
@@ -147,6 +153,8 @@ def render_pdf_report(
         elements.append(Spacer(1, 24))
 
     if profile.columns:
+        _render_charts(elements, profile, styles)
+
         elements.append(Paragraph("Schema Profile", styles["Heading2"]))
 
         column_data = [["Column", "Type", "Nulls", "Null %", "Unique"]]
@@ -217,6 +225,35 @@ def render_pdf_report(
         onFirstPage=lambda canvas, doc: _draw_page_background(canvas, doc, theme),
         onLaterPages=lambda canvas, doc: _draw_page_background(canvas, doc, theme),
     )
+
+
+def _render_charts(
+    elements: list,
+    profile: DatasetProfile,
+    styles,
+) -> None:
+    elements.append(Paragraph("Charts", styles["Heading2"]))
+    elements.append(Spacer(1, 12))
+
+    null_chart = generate_null_chart(profile)
+    cardinality_chart = generate_cardinality_chart(profile)
+    duplicate_chart = generate_duplicate_chart(profile)
+
+    elements.append(Paragraph("Null Percentage by Column", styles["BodyText"]))
+    elements.append(Spacer(1, 8))
+    elements.append(Image(null_chart, width=420, height=220))
+    elements.append(Spacer(1, 24))
+
+    elements.append(Paragraph("Unique Values by Column", styles["BodyText"]))
+    elements.append(Spacer(1, 8))
+    elements.append(Image(cardinality_chart, width=420, height=220))
+    elements.append(Spacer(1, 24))
+
+    if profile.summary and profile.quality:
+        elements.append(Paragraph("Duplicate Overview", styles["BodyText"]))
+        elements.append(Spacer(1, 8))
+        elements.append(Image(duplicate_chart, width=320, height=320))
+        elements.append(Spacer(1, 30))
 
 
 def _build_metadata_data(profile: DatasetProfile) -> list[list[str]]:
