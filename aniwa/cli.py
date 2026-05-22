@@ -14,7 +14,7 @@ from aniwa.reports.markdown_report import render_markdown_report
 from aniwa.reports.pdf_report import render_pdf_report
 
 
-app = typer.Typer(help="Aniwa — Universal dataset profiling and intelligence.")
+app = typer.Typer(help="Aniwa - Universal dataset profiling and intelligence.")
 
 
 class ReportFormat(str, Enum):

@@ -89,3 +89,15 @@ def test_unsupported_file_type(tmp_path):
         assert "Unsupported file type" in str(exc)
     else:
         raise AssertionError("Expected ValueError for unsupported file type")
+
+def test_read_tsv(tmp_path):
+    file_path = tmp_path / "customers.tsv"
+    file_path.write_text(
+        "id\tname\tcountry\n1\tAma\tGhana\n2\tKofi\tGhana\n",
+        encoding="utf-8",
+    )
+
+    df = read_dataset(str(file_path))
+
+    assert df.shape == (2, 3)
+    assert df.columns == ["id", "name", "country"]

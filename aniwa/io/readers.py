@@ -10,6 +10,9 @@ def read_dataset(path: str) -> pl.DataFrame:
     if suffix == ".csv":
         return pl.read_csv(file_path)
 
+    if suffix == ".tsv":
+        return pl.read_csv(file_path, separator="\t")
+
     if suffix in [".xlsx", ".xls"]:
         return pl.read_excel(file_path)
 
@@ -19,4 +22,7 @@ def read_dataset(path: str) -> pl.DataFrame:
     if suffix in [".parquet", ".pq"]:
         return pl.read_parquet(file_path)
 
-    raise ValueError(f"Unsupported file type: {suffix}")
+    raise ValueError(
+        f"Unsupported file type: {suffix}. "
+        "Supported types: ['.csv', '.tsv', '.json', '.parquet', '.xls', '.xlsx']"
+    )
