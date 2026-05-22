@@ -227,11 +227,16 @@ def _build_metadata_data(profile: DatasetProfile) -> list[list[str]]:
     rows = [["Field", "Value"]]
 
     _add_metadata_row(rows, "Generated At", metadata.generated_at)
+
     _add_metadata_row(rows, "Aniwa Version", metadata.aniwa_version)
     _add_metadata_row(rows, "Python Version", metadata.python_version)
+    _add_metadata_row(rows, "Operating System", metadata.operating_system)
+    _add_metadata_row(rows, "Polars Version", metadata.polars_version)
+
     _add_metadata_row(rows, "Dataset Path", metadata.dataset_path)
     _add_metadata_row(rows, "Dataset File Type", metadata.dataset_file_type)
     _add_metadata_row(rows, "Dataset Size", metadata.dataset_size)
+
     _add_metadata_row(rows, "Profiling Mode", metadata.profiling_mode)
     _add_metadata_row(rows, "Report Format", metadata.report_format)
     _add_metadata_row(rows, "Report Template", metadata.report_template)
@@ -251,6 +256,7 @@ def _build_metadata_data(profile: DatasetProfile) -> list[list[str]]:
         )
 
     _add_metadata_row(rows, "Profiling Duration", metadata.profiling_duration)
+    _add_metadata_row(rows, "Command Used", metadata.command_used)
 
     return rows
 

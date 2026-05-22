@@ -114,10 +114,19 @@
         .metadata-table td:first-child {
             width: 220px;
             color: #111827;
+            font-weight: 700;
         }
 
         .metadata-table td:last-child {
             word-break: break-word;
+        }
+
+        code {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 12px;
+            background: rgba(148, 163, 184, 0.12);
+            padding: 2px 6px;
+            border-radius: 6px;
         }
 
         .charts {
@@ -244,85 +253,106 @@
             <tbody>
             {% if profile.metadata.generated_at %}
             <tr>
-                <td><strong>Generated At</strong></td>
+                <td>Generated At</td>
                 <td>{{ profile.metadata.generated_at }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.aniwa_version %}
             <tr>
-                <td><strong>Aniwa Version</strong></td>
+                <td>Aniwa Version</td>
                 <td>{{ profile.metadata.aniwa_version }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.python_version %}
             <tr>
-                <td><strong>Python Version</strong></td>
+                <td>Python Version</td>
                 <td>{{ profile.metadata.python_version }}</td>
+            </tr>
+            {% endif %}
+
+            {% if profile.metadata.operating_system %}
+            <tr>
+                <td>Operating System</td>
+                <td>{{ profile.metadata.operating_system }}</td>
+            </tr>
+            {% endif %}
+
+            {% if profile.metadata.polars_version %}
+            <tr>
+                <td>Polars Version</td>
+                <td>{{ profile.metadata.polars_version }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.dataset_path %}
             <tr>
-                <td><strong>Dataset Path</strong></td>
+                <td>Dataset Path</td>
                 <td>{{ profile.metadata.dataset_path }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.dataset_file_type %}
             <tr>
-                <td><strong>Dataset File Type</strong></td>
+                <td>Dataset File Type</td>
                 <td>{{ profile.metadata.dataset_file_type }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.dataset_size %}
             <tr>
-                <td><strong>Dataset Size</strong></td>
+                <td>Dataset Size</td>
                 <td>{{ profile.metadata.dataset_size }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.profiling_mode %}
             <tr>
-                <td><strong>Profiling Mode</strong></td>
+                <td>Profiling Mode</td>
                 <td>{{ profile.metadata.profiling_mode }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.report_format %}
             <tr>
-                <td><strong>Report Format</strong></td>
+                <td>Report Format</td>
                 <td>{{ profile.metadata.report_format }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.report_template %}
             <tr>
-                <td><strong>Report Template</strong></td>
+                <td>Report Template</td>
                 <td>{{ profile.metadata.report_template }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.included_sections %}
             <tr>
-                <td><strong>Included Sections</strong></td>
+                <td>Included Sections</td>
                 <td>{{ profile.metadata.included_sections | join(", ") }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.excluded_sections %}
             <tr>
-                <td><strong>Excluded Sections</strong></td>
+                <td>Excluded Sections</td>
                 <td>{{ profile.metadata.excluded_sections | join(", ") }}</td>
             </tr>
             {% endif %}
 
             {% if profile.metadata.profiling_duration %}
             <tr>
-                <td><strong>Profiling Duration</strong></td>
+                <td>Profiling Duration</td>
                 <td>{{ profile.metadata.profiling_duration }}</td>
+            </tr>
+            {% endif %}
+
+            {% if profile.metadata.command_used %}
+            <tr>
+                <td>Command Used</td>
+                <td><code>{{ profile.metadata.command_used }}</code></td>
             </tr>
             {% endif %}
             </tbody>
