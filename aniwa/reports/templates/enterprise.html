@@ -3,72 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <title>Aniwa Dataset Profile</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <style>
         body {
             font-family: Inter, Arial, sans-serif;
-            background: #f8fafc;
+            background: #eef4ff;
             color: #0f172a;
             margin: 0;
             padding: 40px;
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1180px;
             margin: 0 auto;
         }
 
         .header {
-            margin-bottom: 32px;
+            background: linear-gradient(135deg, #1e3a8a, #2563eb);
+            color: #ffffff;
+            border-radius: 18px;
+            padding: 28px;
+            margin-bottom: 28px;
+            box-shadow: 0 14px 34px rgba(30, 58, 138, 0.22);
         }
 
         .header h1 {
             margin: 0;
-            font-size: 36px;
+            font-size: 38px;
+            letter-spacing: -0.03em;
         }
 
         .header p {
-            color: #475569;
+            color: #dbeafe;
             font-size: 16px;
+            margin-bottom: 0;
         }
 
         .cards {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
         }
 
         .card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid #dbeafe;
+            border-left: 5px solid #2563eb;
+            border-radius: 14px;
             padding: 20px;
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+            box-shadow: 0 10px 26px rgba(30, 58, 138, 0.08);
         }
 
         .card .label {
-            color: #64748b;
-            font-size: 14px;
+            color: #475569;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .card .value {
-            font-size: 30px;
-            font-weight: 700;
+            font-size: 31px;
+            font-weight: 800;
             margin-top: 8px;
+            color: #1e3a8a;
         }
 
         section {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: #ffffff;
+            border: 1px solid #dbeafe;
             border-radius: 16px;
             padding: 24px;
             margin-bottom: 24px;
-            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+            box-shadow: 0 10px 26px rgba(30, 58, 138, 0.08);
         }
 
         h2 {
             margin-top: 0;
             font-size: 22px;
+            color: #1e3a8a;
+        }
+
+        h3 {
+            margin-top: 0;
+            font-size: 16px;
+            color: #1e3a8a;
         }
 
         table {
@@ -79,19 +100,50 @@
 
         th {
             text-align: left;
-            background: #f1f5f9;
-            color: #334155;
+            background: #eff6ff;
+            color: #1e3a8a;
             padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #bfdbfe;
+            font-weight: 800;
         }
 
         td {
             padding: 12px;
-            border-bottom: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e0ecff;
+            color: #334155;
         }
 
         tr:last-child td {
             border-bottom: none;
+        }
+
+        .charts {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            margin-top: 16px;
+        }
+
+        .chart-card {
+            background: #ffffff;
+            border: 1px solid #bfdbfe;
+            border-radius: 14px;
+            padding: 18px;
+            box-shadow: 0 8px 20px rgba(30, 58, 138, 0.06);
+        }
+
+        .chart-card.full {
+            grid-column: 1 / -1;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .chart-card canvas {
+            max-height: 320px;
+        }
+
+        .chart-card.full canvas {
+            max-height: 260px;
         }
 
         .badge {
@@ -99,12 +151,13 @@
             padding: 4px 10px;
             border-radius: 999px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            text-transform: uppercase;
         }
 
         .info {
             background: #dbeafe;
-            color: #1e40af;
+            color: #1d4ed8;
         }
 
         .warning {
@@ -121,10 +174,12 @@
             color: #64748b;
             font-size: 13px;
             margin-top: 40px;
+            text-align: center;
         }
 
         @media (max-width: 900px) {
-            .cards {
+            .cards,
+            .charts {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
@@ -134,8 +189,13 @@
                 padding: 20px;
             }
 
-            .cards {
+            .cards,
+            .charts {
                 grid-template-columns: 1fr;
+            }
+
+            .chart-card.full {
+                max-width: 100%;
             }
 
             table {
@@ -145,11 +205,13 @@
         }
     </style>
 </head>
+
 <body>
 <div class="container">
+
     <div class="header">
         <h1>Aniwa Dataset Profile</h1>
-        <p>Universal dataset profiling and intelligence report.</p>
+        <p>Enterprise reporting view for dataset quality, structure, and profiling intelligence.</p>
     </div>
 
     <div class="cards">
@@ -176,6 +238,7 @@
 
     <section>
         <h2>Column Profile</h2>
+
         <table>
             <thead>
             <tr>
@@ -186,6 +249,7 @@
                 <th>Unique</th>
             </tr>
             </thead>
+
             <tbody>
             {% for col in profile.columns %}
             <tr>
@@ -204,6 +268,7 @@
     {% if numeric_columns %}
     <section>
         <h2>Numeric Statistics</h2>
+
         <table>
             <thead>
             <tr>
@@ -215,6 +280,7 @@
                 <th>Std</th>
             </tr>
             </thead>
+
             <tbody>
             {% for col in numeric_columns %}
             <tr>
@@ -231,9 +297,31 @@
     </section>
     {% endif %}
 
+    <section>
+        <h2>Charts</h2>
+
+        <div class="charts">
+            <div class="chart-card">
+                <h3>Null Percentage by Column</h3>
+                <canvas id="aniwaEnterpriseNullChart"></canvas>
+            </div>
+
+            <div class="chart-card">
+                <h3>Unique Values by Column</h3>
+                <canvas id="aniwaEnterpriseCardinalityChart"></canvas>
+            </div>
+
+            <div class="chart-card full">
+                <h3>Duplicate Overview</h3>
+                <canvas id="aniwaEnterpriseDuplicateChart"></canvas>
+            </div>
+        </div>
+    </section>
+
     {% if profile.insights %}
     <section>
         <h2>Insights</h2>
+
         <table>
             <thead>
             <tr>
@@ -241,6 +329,7 @@
                 <th>Message</th>
             </tr>
             </thead>
+
             <tbody>
             {% for insight in profile.insights %}
             <tr>
@@ -258,8 +347,88 @@
     {% endif %}
 
     <div class="footer">
-        Generated by Aniwa - See your data clearly.
+        Generated by Aniwa — See your data clearly.
     </div>
+
 </div>
+
+<script id="aniwa-enterprise-chart-data" type="application/json">
+{
+    "columns": {{ profile.columns | map(attribute="name") | list | tojson | safe }},
+    "nullPercents": {{ profile.columns | map(attribute="null_percent") | list | tojson | safe }},
+    "uniqueCounts": {{ profile.columns | map(attribute="unique_count") | list | tojson | safe }},
+    "duplicateRows": {{ profile.quality.duplicate_rows }},
+    "uniqueRows": {{ profile.summary.rows - profile.quality.duplicate_rows }}
+}
+</script>
+
+<script>
+    (() => {
+        const chartDataElement = document.getElementById("aniwa-enterprise-chart-data");
+
+        if (!chartDataElement) {
+            return;
+        }
+
+        const chartData = JSON.parse(chartDataElement.textContent);
+
+        new Chart(document.getElementById("aniwaEnterpriseNullChart"), {
+            type: "bar",
+            data: {
+                labels: chartData.columns,
+                datasets: [{
+                    label: "Null %",
+                    data: chartData.nullPercents,
+                    backgroundColor: "#2563eb"
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        new Chart(document.getElementById("aniwaEnterpriseCardinalityChart"), {
+            type: "bar",
+            data: {
+                labels: chartData.columns,
+                datasets: [{
+                    label: "Unique Values",
+                    data: chartData.uniqueCounts,
+                    backgroundColor: "#0f766e"
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { display: false }
+                }
+            }
+        });
+
+        new Chart(document.getElementById("aniwaEnterpriseDuplicateChart"), {
+            type: "doughnut",
+            data: {
+                labels: ["Duplicate Rows", "Unique Rows"],
+                datasets: [{
+                    data: [
+                        chartData.duplicateRows,
+                        chartData.uniqueRows
+                    ],
+                    backgroundColor: [
+                        "#dc2626",
+                        "#2563eb"
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true
+            }
+        });
+    })();
+</script>
 </body>
 </html>
