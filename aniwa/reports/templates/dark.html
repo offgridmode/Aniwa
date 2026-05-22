@@ -121,6 +121,17 @@
             word-break: break-word;
         }
 
+        code {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 12px;
+            background: rgba(148, 163, 184, 0.18);
+            color: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 6px;
+            white-space: normal;
+            word-break: break-word;
+        }
+
         .charts {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -269,6 +280,20 @@
             </tr>
             {% endif %}
 
+            {% if profile.metadata.operating_system %}
+            <tr>
+                <td>Operating System</td>
+                <td>{{ profile.metadata.operating_system }}</td>
+            </tr>
+            {% endif %}
+
+            {% if profile.metadata.polars_version %}
+            <tr>
+                <td>Polars Version</td>
+                <td>{{ profile.metadata.polars_version }}</td>
+            </tr>
+            {% endif %}
+
             {% if profile.metadata.dataset_path %}
             <tr>
                 <td>Dataset Path</td>
@@ -329,6 +354,13 @@
             <tr>
                 <td>Profiling Duration</td>
                 <td>{{ profile.metadata.profiling_duration }}</td>
+            </tr>
+            {% endif %}
+
+            {% if profile.metadata.command_used %}
+            <tr>
+                <td>Command Used</td>
+                <td><code>{{ profile.metadata.command_used }}</code></td>
             </tr>
             {% endif %}
 
