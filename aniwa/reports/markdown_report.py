@@ -84,8 +84,8 @@ def _append_metadata_row(
 
 
 def _render_summary(profile: DatasetProfile) -> str:
-    if not profile.summary:
-        return "## Summary\nNot available"
+    if profile.summary is None:
+        return ""
 
     return (
         "## Summary\n"
@@ -94,7 +94,6 @@ def _render_summary(profile: DatasetProfile) -> str:
         f"| Rows | {profile.summary.rows:,} |\n"
         f"| Columns | {profile.summary.columns:,} |"
     )
-
 
 def _render_columns(profile: DatasetProfile) -> str:
     if not profile.columns:
@@ -162,7 +161,10 @@ def _render_quality(profile: DatasetProfile) -> str:
 
 
 def _render_insights(profile: DatasetProfile) -> str:
-    if not profile.insights:
+    if profile.insights is None:
+        return ""
+    
+    if len(profile.insights) == 0:
         return "## Insights\nNo major issues detected."
 
     rows = [

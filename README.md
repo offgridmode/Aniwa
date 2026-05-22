@@ -285,6 +285,24 @@ aniwa examples/customers.csv --mode deep
 
 ---
 
+## Filtering Report Sections
+
+You can include or exclude specific sections to generate smaller, focused reports. 
+Valid sections are: `summary`, `schema`, `quality`, `statistics`, `insights`, `charts`.
+
+Include only selected sections:
+```bash
+aniwa examples/customers.csv --report html --include summary,insights
+```
+
+Exclude selected sections:
+```bash
+aniwa examples/customers.csv --report html --exclude statistics
+```
+*(Note: `--include` and `--exclude` cannot be used at the same time).*
+
+---
+
 # Example Console Output
 
 ```text
@@ -300,7 +318,6 @@ aniwa examples/customers.csv --mode deep
 ---
 
 # Project Structure
-
 ```text
 Aniwa/
 │
