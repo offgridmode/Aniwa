@@ -172,7 +172,7 @@ def test_profile_dataframe_can_include_only_insights():
     )
 
     assert profile.summary is None
-    assert profile.columns is not None
+    assert profile.columns is None
     assert profile.quality is None
     assert profile.insights is not None
     assert len(profile.insights) > 0

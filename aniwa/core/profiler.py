@@ -34,20 +34,27 @@ def profile_dataframe(
         sections = set(ReportSection)
 
     rows = df.height
-    columns = df.width
+    column_count = df.width
 
     summary = None
     if ReportSection.summary in sections:
         summary = DatasetSummary(
             rows=rows,
-            columns=columns,
+            columns=column_count,
         )
 
-    needs_column_profiles = _needs_column_profiles(sections)
+    analysis_columns = None
+    if _needs_column_analysis(sections):
+        analysis_columns = _profile_columns(
+            df=df,
+            rows=rows,
+            mode=mode,
+            include_statistics=ReportSection.statistics in sections,
+        )
 
-    column_profiles = None
-    if needs_column_profiles:
-        column_profiles = _profile_columns(
+    displayed_columns = None
+    if _should_display_columns(sections):
+        displayed_columns = analysis_columns or _profile_columns(
             df=df,
             rows=rows,
             mode=mode,
@@ -71,26 +78,37 @@ def profile_dataframe(
     insights = None
     if ReportSection.insights in sections:
         insights = generate_insights(
-            columns=column_profiles or [],
+            columns=analysis_columns or [],
             duplicate_rows=duplicate_rows,
             total_rows=rows,
         )
 
     return DatasetProfile(
         summary=summary,
-        columns=column_profiles,
+        columns=displayed_columns,
         quality=quality,
         insights=insights,
     )
 
 
-def _needs_column_profiles(sections: set[ReportSection]) -> bool:
+def _needs_column_analysis(sections: set[ReportSection]) -> bool:
     return any(
         section in sections
         for section in {
             ReportSection.schema,
             ReportSection.statistics,
             ReportSection.insights,
+            ReportSection.charts,
+        }
+    )
+
+
+def _should_display_columns(sections: set[ReportSection]) -> bool:
+    return any(
+        section in sections
+        for section in {
+            ReportSection.schema,
+            ReportSection.statistics,
             ReportSection.charts,
         }
     )

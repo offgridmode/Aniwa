@@ -227,14 +227,22 @@
 </head>
 <body>
 <div class="container">
+    {% set enabled_sections = profile.metadata.included_sections if profile.metadata and profile.metadata.included_sections else [] %}
+    {% set summary_enabled = "summary" in enabled_sections %}
+    {% set schema_enabled = "schema" in enabled_sections %}
+    {% set quality_enabled = "quality" in enabled_sections %}
+    {% set statistics_enabled = "statistics" in enabled_sections %}
+    {% set insights_enabled = "insights" in enabled_sections %}
+    {% set charts_enabled = "charts" in enabled_sections %}
+
     <div class="header">
         <h1>Aniwa Dataset Profile</h1>
         <p>Universal dataset profiling and intelligence report.</p>
     </div>
 
-    {% if profile.summary or profile.quality %}
+    {% if (summary_enabled and profile.summary) or (quality_enabled and profile.quality) %}
     <div class="cards">
-        {% if profile.summary %}
+        {% if summary_enabled and profile.summary %}
         <div class="card">
             <div class="label">Rows</div>
             <div class="value">{{ profile.summary.rows }}</div>
@@ -246,7 +254,7 @@
         </div>
         {% endif %}
 
-        {% if profile.quality %}
+        {% if quality_enabled and profile.quality %}
         <div class="card">
             <div class="label">Duplicate Rows</div>
             <div class="value">{{ profile.quality.duplicate_rows }}</div>
@@ -374,7 +382,7 @@
     </section>
     {% endif %}
 
-    {% if profile.columns %}
+    {% if schema_enabled and profile.columns %}
     <section>
         <h2>Column Profile</h2>
         <table>
@@ -400,7 +408,9 @@
             </tbody>
         </table>
     </section>
+    {% endif %}
 
+    {% if statistics_enabled and profile.columns %}
     {% set numeric_columns = profile.columns | selectattr("numeric_stats") | list %}
     {% if numeric_columns %}
     <section>
@@ -433,7 +443,7 @@
     {% endif %}
     {% endif %}
 
-    {% if profile.columns or (profile.summary and profile.quality) %}
+    {% if charts_enabled and (profile.columns or (profile.summary and profile.quality)) %}
     <section>
         <h2>Charts</h2>
 
@@ -539,7 +549,7 @@
     </script>
     {% endif %}
 
-    {% if profile.insights is not none %}
+    {% if insights_enabled and profile.insights is not none %}
     <section>
         <h2>Insights</h2>
 

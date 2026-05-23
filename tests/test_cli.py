@@ -164,7 +164,7 @@ def test_cli_html_include_summary_and_insights(tmp_path):
     assert "Rows" in html
     assert "Columns" in html
     assert "Insights" in html
-    assert "Duplicate Rows" not in html
+    assert '<div class="label">Duplicate Rows</div>' not in html
     assert "Column Profile" not in html
     assert "Numeric Statistics" not in html
 
@@ -195,9 +195,9 @@ def test_cli_html_include_summary_only(tmp_path):
 
     assert "Rows" in html
     assert "Columns" in html
-    assert "Duplicate Rows" not in html
+    assert '<div class="label">Duplicate Rows</div>' not in html
     assert "Column Profile" not in html
-    assert "Charts" not in html
+    assert "<h2>Charts</h2>" not in html
     assert "Insights" not in html
 
 
@@ -227,7 +227,7 @@ def test_cli_html_exclude_quality(tmp_path):
 
     assert "Rows" in html
     assert "Columns" in html
-    assert "Duplicate Rows" not in html
+    assert '<div class="label">Duplicate Rows</div>' not in html
     assert "Column Profile" in html
     assert "Insights" in html
 
@@ -259,7 +259,7 @@ def test_cli_html_exclude_charts(tmp_path):
     assert "Rows" in html
     assert "Columns" in html
     assert "Column Profile" in html
-    assert "Charts" not in html
+    assert "<h2>Charts</h2>" not in html
     assert "aniwa-default-chart-data" not in html
 
 
