@@ -1,5 +1,4 @@
 import platform
-import sys
 import time
 from datetime import datetime, timezone
 from enum import Enum
@@ -42,7 +41,15 @@ def validate_sections(value: str | None) -> list[str] | None:
     if not value:
         return None
 
-    split_sections = [item.strip() for item in value.split(",")]
+    split_sections = [
+        item.strip()
+        for item in value.split(",")
+        if item.strip()
+    ]
+
+    if not split_sections:
+        return None
+
     valid_options = [section.value for section in ReportSection]
 
     for section in split_sections:
@@ -216,7 +223,11 @@ def profile(
     start_time = time.perf_counter()
 
     df = read_dataset(path)
-    dataset_profile = profile_dataframe(df, mode=mode.value, sections=sections)
+    dataset_profile = profile_dataframe(
+        df,
+        mode=mode.value,
+        sections=sections,
+    )
 
     duration_seconds = time.perf_counter() - start_time
 
