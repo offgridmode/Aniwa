@@ -207,6 +207,34 @@ cd Aniwa
 
 ---
 
+
+## Configuration
+
+You can simplify your workflow by using a configuration file instead of passing CLI arguments every time. 
+Aniwa automatically detects and loads a configuration file if it exists in the current working directory.
+
+### Supported Files
+Aniwa searches for these filenames in order:
+- `aniwa.yaml` / `aniwa.yml`
+- `aniwa.toml`
+- `aniwa.json`
+
+### Example `aniwa.yaml`
+```yaml
+mode: deep
+report:
+  format: html
+  template: dark
+  output_dir: reports/
+sections:
+  include:
+    - summary
+    - schema
+    - statistics
+```
+
+---
+
 ## Create a Virtual Environment
 
 ```bash
@@ -226,8 +254,6 @@ source .venv/Scripts/activate
 ```bash
 source .venv/bin/activate
 ```
-
----
 
 ## Install Dependencies
 
