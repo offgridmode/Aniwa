@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from aniwa.models.profile import (
     ColumnProfile,
     DatasetProfile,
@@ -90,10 +88,11 @@ def build_profile() -> DatasetProfile:
             report_template="enterprise",
             included_sections=[
                 "summary",
-                "columns",
+                "schema",
                 "quality",
                 "statistics",
                 "insights",
+                "charts",
             ],
             excluded_sections=None,
             profiling_duration="1.42s",
@@ -106,9 +105,13 @@ def build_profile() -> DatasetProfile:
     )
 
 
+def assert_valid_pdf(output_path) -> None:
+    assert output_path.exists()
+    assert output_path.stat().st_size > 0
+
+
 def test_render_pdf_report_default(tmp_path):
     profile = build_profile()
-
     output_path = tmp_path / "report_default.pdf"
 
     render_pdf_report(
@@ -117,13 +120,11 @@ def test_render_pdf_report_default(tmp_path):
         template="default",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_clean(tmp_path):
     profile = build_profile()
-
     output_path = tmp_path / "report_clean.pdf"
 
     render_pdf_report(
@@ -132,13 +133,11 @@ def test_render_pdf_report_clean(tmp_path):
         template="clean",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_compact(tmp_path):
     profile = build_profile()
-
     output_path = tmp_path / "report_compact.pdf"
 
     render_pdf_report(
@@ -147,13 +146,11 @@ def test_render_pdf_report_compact(tmp_path):
         template="compact",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_enterprise(tmp_path):
     profile = build_profile()
-
     output_path = tmp_path / "report_enterprise.pdf"
 
     render_pdf_report(
@@ -162,13 +159,11 @@ def test_render_pdf_report_enterprise(tmp_path):
         template="enterprise",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_dark(tmp_path):
     profile = build_profile()
-
     output_path = tmp_path / "report_dark.pdf"
 
     render_pdf_report(
@@ -177,8 +172,7 @@ def test_render_pdf_report_dark(tmp_path):
         template="dark",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_creates_parent_directories(tmp_path):
@@ -197,7 +191,7 @@ def test_render_pdf_report_creates_parent_directories(tmp_path):
         template="default",
     )
 
-    assert output_path.exists()
+    assert_valid_pdf(output_path)
     assert output_path.parent.exists()
 
 
@@ -213,8 +207,7 @@ def test_render_pdf_report_without_metadata(tmp_path):
         template="default",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_without_insights(tmp_path):
@@ -229,14 +222,13 @@ def test_render_pdf_report_without_insights(tmp_path):
         template="default",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_without_numeric_statistics(tmp_path):
     profile = build_profile()
 
-    for column in profile.columns:
+    for column in profile.columns or []:
         column.numeric_stats = None
 
     output_path = tmp_path / "report_without_stats.pdf"
@@ -247,8 +239,52 @@ def test_render_pdf_report_without_numeric_statistics(tmp_path):
         template="default",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
+
+
+def test_render_pdf_report_without_summary(tmp_path):
+    profile = build_profile()
+    profile.summary = None
+
+    output_path = tmp_path / "report_without_summary.pdf"
+
+    render_pdf_report(
+        profile=profile,
+        output=str(output_path),
+        template="default",
+    )
+
+    assert_valid_pdf(output_path)
+
+
+def test_render_pdf_report_without_quality(tmp_path):
+    profile = build_profile()
+    profile.quality = None
+
+    output_path = tmp_path / "report_without_quality.pdf"
+
+    render_pdf_report(
+        profile=profile,
+        output=str(output_path),
+        template="default",
+    )
+
+    assert_valid_pdf(output_path)
+
+
+def test_render_pdf_report_without_columns(tmp_path):
+    profile = build_profile()
+    profile.columns = None
+
+    output_path = tmp_path / "report_without_columns.pdf"
+
+    render_pdf_report(
+        profile=profile,
+        output=str(output_path),
+        template="default",
+    )
+
+    assert_valid_pdf(output_path)
 
 
 def test_render_pdf_report_with_empty_columns(tmp_path):
@@ -277,13 +313,11 @@ def test_render_pdf_report_with_empty_columns(tmp_path):
         template="clean",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
 
 
 def test_invalid_template_raises_value_error(tmp_path):
     profile = build_profile()
-
     output_path = tmp_path / "invalid_template.pdf"
 
     try:
@@ -301,7 +335,6 @@ def test_invalid_template_raises_value_error(tmp_path):
 
 def test_render_pdf_report_includes_charts(tmp_path):
     profile = build_profile()
-
     output_path = tmp_path / "report_with_charts.pdf"
 
     render_pdf_report(
@@ -310,5 +343,4 @@ def test_render_pdf_report_includes_charts(tmp_path):
         template="enterprise",
     )
 
-    assert output_path.exists()
-    assert output_path.stat().st_size > 0
+    assert_valid_pdf(output_path)
