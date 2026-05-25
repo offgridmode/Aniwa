@@ -211,8 +211,6 @@ def get_config():
         typer.secho(f"Configuration Error: {e}", fg=typer.colors.RED, err=True)
         raise typer.Exit(code=1)
 
-config = get_config()
-
 @app.command()
 def profile(
     path: str = typer.Argument(..., help="Path to dataset file."),
@@ -220,13 +218,13 @@ def profile(
         None, "--config", "-c", help="Path to custom configuration file."
     ),
     report: ReportFormat = typer.Option(
-        config.get("report", ReportFormat.console), 
+        None,
         "--report", 
         "-r",
         help="Report format"
     ),
     output: str | None = typer.Option(
-        config.get("output", None),
+        None,
         "--output",
         "-o",
         help="Output file path.",
@@ -238,25 +236,25 @@ def profile(
         help="Output directory for reports. Ignored if --output is specified.",
     ),
     mode: ProfileMode = typer.Option(
-        config.get("mode", ProfileMode.deep),   
+        ProfileMode.deep,   
         "--mode",
         "-m",
         help="Profiling mode. Use 'fast' for lightweight checks or 'deep' for full profiling.",
     ),
     include: str | None = typer.Option(
-        config.get("include", None),
+        None,
         "--include",
         "-i",
         help="Comma-separated list of report sections to include.",
     ),
     exclude: str | None = typer.Option(
-        config.get("exclude", None),
+        None,
         "--exclude",
         "-e",
         help="Comma-separated list of report sections to exclude.",
     ),
     template: str = typer.Option(
-        config.get("template", "default"),
+        "default",
         "--template",
         "-t",
         help="Report template for HTML/PDF outputs. Options: default, clean, compact, enterprise, dark.",
@@ -271,10 +269,17 @@ def profile(
         default_file = find_config_file()
         active_config = get_flattened_config(default_file) if default_file else {}
     
+    config_report = active_config.get("report")
+    if config_report and isinstance(config_report, str):
+        active_config["report"] = ReportFormat(config_report)
+        
+    config_mode = active_config.get("mode")
+    if config_mode and isinstance(config_mode, str):
+        active_config["mode"] = ProfileMode(config_mode)
+    
     """
     Profile a dataset.
     """
-
     report = report or active_config.get("report", ReportFormat.console)
     output = output or active_config.get("output", None)
     mode = mode or active_config.get("mode", ProfileMode.deep)
