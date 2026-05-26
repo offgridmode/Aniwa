@@ -10,41 +10,132 @@
 
 > **See your data clearly.**
 
-Aniwa is an open-source universal dataset profiling and intelligence tool designed for developers, analysts, data engineers, researchers, and modern data teams.
+Aniwa is an open-source universal dataset profiling and intelligence tool for developers, analysts, data engineers, researchers, and modern data teams.
 
-Aniwa helps you instantly understand datasets through:
+Aniwa helps users quickly understand datasets through:
+
 - schema profiling
 - data quality analysis
 - statistical summaries
 - intelligent insights
 - rich terminal reports
-- shareable HTML reports
+- shareable reports
+- configurable profiling workflows
 
-Whether you're working with CSV files, Excel spreadsheets, JSON datasets, or Parquet files, Aniwa gives you a fast and elegant way to inspect and understand data.
+Whether you're working with CSV files, Excel spreadsheets, JSON datasets, or Parquet files, Aniwa provides a fast and elegant way to inspect, understand, and trust your data.
 
 ---
 
-## Current Version
+# Current Version
 
-Version 0.1.1
+```text
+v0.1.1
+```
 
 ---
 
 # Why Aniwa?
 
-Data professionals constantly work with unknown datasets.
+Modern data workflows constantly involve:
 
-Before trusting a dataset, people need to know:
+```text
+unknown datasets
+```
+
+Before trusting a dataset, teams need to answer questions like:
 
 - What columns exist?
 - What data types are present?
 - Are there missing values?
 - Are there duplicates?
 - Are there suspicious patterns?
-- Which columns might contain IDs or PII?
+- Which columns may contain IDs or sensitive information?
 - Is the dataset healthy?
 
-Aniwa makes answering those questions simple.
+Aniwa makes answering those questions:
+
+```text
+fast, intelligent, and developer-friendly
+```
+
+---
+
+# Features
+
+## Universal Dataset Support
+
+Aniwa currently supports:
+
+- CSV
+- Excel (.xlsx/.xls)
+- JSON
+- Parquet
+
+Future releases are planned to support:
+
+- PostgreSQL
+- MySQL
+- DuckDB
+- BigQuery
+- Snowflake
+
+---
+
+## Core Profiling
+
+Aniwa currently provides:
+
+### Dataset Summary
+
+- row counts
+- column counts
+- dataset size analysis
+
+### Schema Profiling
+
+- type inference
+- schema overview
+- mixed type detection
+
+### Data Quality Analysis
+
+- null analysis
+- duplicate detection
+- uniqueness analysis
+- sparse column detection
+
+### Statistical Profiling
+
+- minimum values
+- maximum values
+- mean
+- median
+- standard deviation
+
+### Intelligent Insights
+
+- possible ID detection
+- high-cardinality warnings
+- sparse column warnings
+- suspicious quality patterns
+
+---
+
+## Reporting
+
+Aniwa currently supports:
+
+- Rich terminal reports
+- JSON reports
+- HTML reports
+
+Upcoming releases are planned to include:
+
+- Markdown reports
+- Excel reports
+- PDF reports
+- charts
+- report templates
 
 ---
 
@@ -54,7 +145,7 @@ Install Aniwa from PyPI:
 
 ```bash
 pip install aniwa
-````
+```
 
 Verify installation:
 
@@ -90,11 +181,6 @@ Generate an HTML report:
 aniwa customers.csv --report html --output profile.html
 ```
 
-Generate a Markdown report:
-```bash
-aniwa customers.csv --report markdown --output profile.md
-```
-
 Run lightweight profiling:
 
 ```bash
@@ -109,223 +195,73 @@ aniwa customers.csv --mode deep
 
 ---
 
-# Supported Formats
+# Configuration Files
 
-Aniwa currently supports:
+Aniwa supports configuration-driven workflows.
 
-* CSV
-* Excel (.xlsx,.xls)
-* JSON
-* Parquet
+Supported config formats:
 
-
----
-
-# Features
-
-## Universal Dataset Support
-
-Aniwa supports multiple modern dataset formats:
-
-- CSV
-- Excel
+- YAML
+- TOML
 - JSON
-- Parquet
 
-Future releases will include:
-- PostgreSQL
-- MySQL
-- DuckDB
-- BigQuery
-- Snowflake
+Aniwa automatically searches for:
 
----
-
-## Core Profiling
-
-Aniwa provides:
-
-### Dataset Summary
-- row counts
-- column counts
-- dataset size analysis
-
-### Schema Profiling
-- type inference
-- mixed type detection
-- schema overview
-
-### Data Quality Analysis
-- null analysis
-- duplicate detection
-- uniqueness analysis
-- sparse column detection
-
-### Statistical Profiling
-- minimum values
-- maximum values
-- mean
-- median
-- standard deviation
-
-### Intelligent Insights
-- possible ID detection
-- high-cardinality warnings
-- sparse column warnings
-- suspicious quality patterns
-
----
-
-## Reporting
-
-### Rich Terminal Reports
-
-Aniwa uses Rich-powered terminal interfaces for beautiful developer-friendly output.
-
-### JSON Export
-
-Machine-readable profiling results.
-
-### HTML Reports
-
-Generate shareable profiling reports for teams, audits, and debugging workflows.
-
-### Markdown Reports
-
-Generate readable Markdown reports perfect for documentation and GitHub issues.
-
----
-
-# Installation
-
-## Clone the Repository
-
-```bash
-git clone https://github.com/ReginaldErzoah/Aniwa.git
-cd Aniwa
+```text
+aniwa.yaml
+aniwa.yml
+aniwa.toml
+aniwa.json
 ```
 
----
+Example:
 
-
-## Configuration
-
-You can simplify your workflow by using a configuration file instead of passing CLI arguments every time. 
-Aniwa automatically detects and loads a configuration file if it exists in the current working directory.
-
-### Supported Files
-Aniwa searches for these filenames in order:
-- `aniwa.yaml` / `aniwa.yml`
-- `aniwa.toml`
-- `aniwa.json`
-
-### Example `aniwa.yaml`
 ```yaml
 mode: deep
+
 report:
   format: html
-  template: dark
   output_dir: reports/
+
 sections:
   include:
     - summary
     - schema
     - statistics
+    - insights
+```
+
+Use a custom config file:
+
+```bash
+aniwa customers.csv --config config.yaml
 ```
 
 ---
 
-## Create a Virtual Environment
+# Report Sections
+
+Aniwa supports configurable report sections.
+
+Current sections include:
+
+- summary
+- schema
+- quality
+- statistics
+- insights
+
+Example:
 
 ```bash
-python -m venv .venv
+aniwa customers.csv --include summary,statistics
 ```
 
-Activate the environment:
-
-### Windows
+Exclude sections:
 
 ```bash
-source .venv/Scripts/activate
+aniwa customers.csv --exclude statistics
 ```
-
-### macOS/Linux
-
-```bash
-source .venv/bin/activate
-```
-
-## Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Install Aniwa locally:
-
-```bash
-pip install -e .
-```
-
----
-
-# Usage
-
-## Basic Profiling
-
-```bash
-aniwa examples/customers.csv
-```
-
----
-
-## Generate JSON Report
-
-```bash
-aniwa examples/customers.csv --report json --output profile.json
-```
-
----
-
-## Generate HTML Report
-
-```bash
-aniwa examples/customers.csv --report html --output profile.html
-```
-
----
-
-## Fast Profiling Mode
-
-```bash
-aniwa examples/customers.csv --mode fast
-```
-
----
-
-## Deep Profiling Mode
-
-```bash
-aniwa examples/customers.csv --mode deep
-```
-
----
-
-## Filtering Report Sections
-
-You can include or exclude specific sections to generate smaller, focused reports. 
-Valid sections are: `summary`, `schema`, `quality`, `statistics`, `insights`, `charts`.
-
-Include only selected sections:
-```bash
-aniwa examples/customers.csv --report html --include summary,insights
-```
-
-Exclude selected sections:
-```bash
-aniwa examples/customers.csv --report html --exclude statistics
-```
-*(Note: `--include` and `--exclude` cannot be used at the same time).*
 
 ---
 
@@ -343,76 +279,162 @@ aniwa examples/customers.csv --report html --exclude statistics
 
 ---
 
+# Documentation
+
+Aniwa now includes a full documentation system.
+Full documentation available here:
+
+
+Documentation includes:
+
+- getting started guides
+- architecture documentation
+- developer guides
+- release notes
+- roadmap
+- philosophy
+
+View documentation locally with MkDocs:
+
+```bash
+mkdocs serve
+```
+
+Build documentation:
+
+```bash
+mkdocs build
+```
+
+Documentation structure:
+
+```text
+docs/
+├── index.md
+├── roadmap.md
+├── philosophy.md
+├── getting-started/
+├── developer-guide/
+└── release-notes/
+```
+
+---
+
+# Installation for Development
+
+Clone the repository:
+
+```bash
+git clone https://github.com/ReginaldErzoah/Aniwa.git
+cd Aniwa
+```
+
+Create a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+Activate the environment:
+
+## Windows
+
+```bash
+source .venv/Scripts/activate
+```
+
+## macOS/Linux
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Install Aniwa locally:
+
+```bash
+pip install -e .
+```
+
+---
+
+# Architecture
+
+Aniwa currently follows a modular layered architecture:
+
+```text
+CLI
+→ Configuration
+→ Readers
+→ Profiling Engine
+→ Models
+→ Reports
+```
+
+This architecture prioritizes:
+
+- modularity
+- maintainability
+- scalability
+- contributor friendliness
+
+---
+
 # Project Structure
+
 ```text
 Aniwa/
 │
 ├── aniwa/
 │   ├── cli.py
+│   ├── config/
 │   ├── core/
 │   ├── io/
 │   ├── models/
 │   ├── reports/
+│   ├── templates/
 │   └── utils/
 │
+├── docs/
 ├── tests/
 ├── examples/
+│
 ├── README.md
 ├── CONTRIBUTING.md
-├── requirements.txt
-└── pyproject.toml
+├── mkdocs.yml
+├── pyproject.toml
+└── requirements.txt
 ```
 
 ---
 
 # Roadmap
 
-## v0.1.1 - MVP Foundation
+## v0.1.x — Foundation
 
-### Core Features
-- [x] CSV support
-- [x] Excel support
-- [x] JSON support
-- [x] Parquet support
-- [x] schema profiling
-- [x] null analysis
-- [x] duplicate detection
-- [x] statistical profiling
-- [x] console reports
-- [x] JSON export
-- [x] HTML reports
-- [x] Markdown reports
+- universal dataset profiling
+- reporting systems
+- configuration workflows
+- modular architecture
+- developer-first UX
 
-### Developer Experience
-- [x] Rich terminal UI
-- [x] fast and deep modes
-- [x] profiling insights
+## v0.2.x — Intelligence
 
----
-
-## v0.1.2 - More Outputs & File Supports
-
-- CSV summary report
-- PDF report
-- Excel report
-- charts in HTML
-- report templates
-- custom report sections
-
-
----
-
-## v0.2.0 - Intelligence Release
+Planned features:
 
 - correlation analysis
-- outlier detection
-- semantic detection
+- anomaly detection
+- semantic profiling
 - improved insights
-- Markdown reports
 
----
+## v0.3.x — Universal Connectivity
 
-## v0.3.0 - Universal Connectivity
+Planned features:
 
 - PostgreSQL support
 - MySQL support
@@ -421,28 +443,28 @@ Aniwa/
 - profiling history
 - snapshot management
 
----
+## v0.4.x — Extensibility
 
-## v0.4.0 - Extensibility
+Planned features:
 
 - plugin system
 - custom profiling modules
 - community extensions
 
----
+## v0.5.x — AI Intelligence
 
-## v0.5.0 - AI Intelligence
+Planned features:
 
 - dataset summarization
 - semantic understanding
-- AI-powered recommendations
+- AI-assisted recommendations
 - anomaly explanations
 
 ---
 
 # Philosophy
 
-Aniwa is built around a few core principles:
+Aniwa is built around several core principles:
 
 - universal
 - developer-first
@@ -452,20 +474,37 @@ Aniwa is built around a few core principles:
 - beautiful
 - automation-friendly
 
-For more details on philosophy, visit docs/
+The long-term goal is to build:
+
+```text
+universal data intelligence infrastructure
+```
+
+For deeper architectural and ecosystem thinking, see:
+
+```text
+docs/philosophy.md
+docs/roadmap.md
+```
 
 ---
-
 
 # Contributing
 
 Contributions are welcome.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for:
-- development setup
-- contribution guidelines
-- pull request workflow
-- testing instructions
+See:
+
+- CONTRIBUTING.md
+- docs/developer-guide/
+
+for:
+
+- local development
+- testing workflows
+- architecture guidance
+- release workflows
+- contributor standards
 
 ---
 
