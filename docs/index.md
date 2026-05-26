@@ -1,78 +1,406 @@
 # Aniwa Documentation
 
-> See your data clearly.
+> **See your data clearly.**
 
-Aniwa is an open-source universal dataset profiling and intelligence tool for developers, analysts, data engineers, researchers, and modern data teams.
+Welcome to the official documentation for Aniwa.
 
-It helps users understand datasets through schema profiling, data quality analysis, statistical summaries, intelligent insights, rich terminal reports, and shareable reports.
+Aniwa is an open-source universal dataset profiling and intelligence tool built for:
 
-## Documentation Sections
+- developers
+- analysts
+- data engineers
+- researchers
+- data scientists
+- modern data teams
 
-### Getting Started
+Aniwa helps users quickly understand datasets through:
 
-Use this section to install Aniwa, run your first profile, understand configuration files, and explore examples.
+- schema profiling
+- data quality analysis
+- statistical summaries
+- intelligent insights
+- rich terminal reports
+- shareable reports
+- configurable workflows
 
-### User Guide
+The project is designed around the idea that:
 
-Use this section to understand CLI usage, profiling modes, report formats, templates, charts, metadata, output management, and configurable report sections.
+```text
+understanding data should be fast, intelligent, scalable, and beautiful
+```
 
-### Architecture
+---
 
-Use this section to understand Aniwa’s internal systems, execution flow, profiling engine, reporting system, configuration system, models, performance strategy, and long-term scalability.
+# What is Aniwa?
 
-### Developer Guide
+Aniwa is designed to become:
 
-Use this section to set up Aniwa locally, run tests, add report formats, add templates, add insights, add readers, manage dependencies, and follow code style.
+```text
+universal infrastructure for dataset understanding
+```
 
-### API Reference
+It enables users to:
 
-Use this section to understand the internal modules and public-facing Python structures used by Aniwa.
+- inspect unknown datasets
+- detect quality issues
+- generate profiling reports
+- automate profiling workflows
+- improve trust in data systems
 
-### Project
+---
 
-Use this section to understand Aniwa’s philosophy, roadmap, design principles, governance, maintainership, versioning, and ecosystem vision.
+# Documentation Structure
 
-### Contributors
+The documentation is intentionally organized to remain:
 
-Use this section to contribute effectively through issues, pull requests, testing checklists, and branching guidelines.
+- simple
+- scalable
+- contributor-friendly
+- easy to navigate
 
-### References
+---
 
-Use this section for glossary terms, datasets, comparisons, inspirations, and recommended resources.
+# Documentation Sections
 
-## Core Philosophy
+---
 
-Aniwa is built around seven principles:
+# Getting Started
 
-- universal
-- developer-first
-- fast
-- modular
-- intelligent
-- beautiful
-- automation-friendly
+Location:
 
-## Current Capabilities
+```text
+docs/getting-started/
+```
+
+This section helps users:
+
+- install Aniwa
+- run their first profile
+- understand configuration files
+- explore examples
+- learn basic workflows
+
+---
+
+# Developer Guide
+
+Location:
+
+```text
+docs/developer-guide/
+```
+
+This section explains:
+
+- Aniwa architecture
+- profiling systems
+- reporting systems
+- testing workflows
+- local development
+- extensibility
+- contributor workflows
+
+It is intended for:
+
+- contributors
+- maintainers
+- advanced users
+- future core engineers
+
+---
+
+# Release Notes
+
+Location:
+
+```text
+docs/release-notes/
+```
+
+This section tracks:
+
+- release history
+- improvements
+- bug fixes
+- new features
+- architectural changes
+
+---
+
+# Core Documents
+
+---
+
+# Roadmap
+
+File:
+
+```text
+docs/roadmap.md
+```
+
+Explains:
+
+- long-term direction
+- ecosystem growth
+- future systems
+- scalability plans
+
+---
+
+# Philosophy
+
+File:
+
+```text
+docs/philosophy.md
+```
+
+Explains:
+
+- design principles
+- engineering philosophy
+- architectural thinking
+- ecosystem vision
+
+---
+
+# Core Philosophy
+
+Aniwa is built around several core principles:
+
+| Principle |
+|---|
+| universal |
+| developer-first |
+| fast |
+| modular |
+| intelligent |
+| beautiful |
+| automation-friendly |
+
+These principles guide:
+
+- architecture
+- APIs
+- reports
+- contributor workflows
+- scalability decisions
+
+---
+
+# Current Capabilities
 
 Aniwa currently supports:
 
-- CSV
-- Excel
-- JSON
-- JSONL
-- TSV
-- Parquet
-- Console reports
-- JSON reports
-- HTML reports
-- Markdown reports
-- Excel reports
-- PDF reports
-- Config files
-- Report templates
-- Report sections
-- Charts
+| Capability |
+|---|
+| CSV profiling |
+| Excel profiling |
+| JSON profiling |
+| JSONL profiling |
+| TSV profiling |
+| Parquet profiling |
+| console reports |
+| JSON reports |
+| HTML reports |
+| Markdown reports |
+| Excel reports |
+| PDF reports |
+| configuration files |
+| report templates |
+| configurable report sections |
+| charts |
 
-## Long-Term Vision
+---
 
-Aniwa is designed to grow from a command-line profiling tool into a broader data intelligence platform for quality, trust, governance, observability, metadata, and AI-assisted dataset understanding.
+# Current Profiling Features
+
+Aniwa currently provides:
+
+| Feature |
+|---|
+| schema profiling |
+| null analysis |
+| duplicate detection |
+| uniqueness analysis |
+| statistical profiling |
+| intelligent insights |
+| metadata generation |
+
+---
+
+# Supported Configuration Formats
+
+Aniwa currently supports:
+
+| Format |
+|---|
+| YAML |
+| TOML |
+| JSON |
+
+---
+
+# Example Usage
+
+Basic dataset profiling:
+
+```bash
+aniwa customers.csv
+```
+
+Generate an HTML report:
+
+```bash
+aniwa customers.csv --report html
+```
+
+Use a configuration file:
+
+```bash
+aniwa customers.csv --config config.yaml
+```
+
+---
+
+# Architecture Overview
+
+Aniwa currently follows a layered architecture:
+
+```text
+CLI
+→ Configuration
+→ Readers
+→ Profiling Engine
+→ Models
+→ Reports
+→ Templates
+```
+
+This architecture enables:
+
+- modularity
+- maintainability
+- scalability
+- extensibility
+
+---
+
+# Why Aniwa Exists
+
+Modern data workflows often begin with:
+
+```text
+unknown datasets
+```
+
+Before trusting data, users need to understand:
+
+- schema
+- quality
+- completeness
+- risk
+- structure
+- patterns
+
+Aniwa exists to make that process:
+
+```text
+fast, intelligent, and reliable
+```
+
+---
+
+# Long-Term Vision
+
+Aniwa is designed to evolve from:
+
+```text
+a profiling CLI
+```
+
+into:
+
+```text
+a universal data intelligence platform
+```
+
+---
+
+# Future Direction
+
+Future ecosystem areas may include:
+
+| Area |
+|---|
+| database connectivity |
+| cloud integrations |
+| governance systems |
+| observability |
+| lineage systems |
+| trust scoring |
+| AI-assisted profiling |
+| distributed execution |
+
+---
+
+# Scalability Philosophy
+
+Aniwa is being designed with:
+
+```text
+10–20+ year architectural thinking
+```
+
+The project aims to remain:
+
+- maintainable
+- extensible
+- scalable
+- contributor-friendly
+
+as the ecosystem grows.
+
+---
+
+# Open Source Philosophy
+
+Aniwa strongly values:
+
+- transparency
+- collaboration
+- maintainability
+- community contribution
+
+The long-term goal is to build:
+
+```text
+global open-source infrastructure for dataset understanding
+```
+
+---
+
+# Recommended Reading Path
+
+New users should begin with:
+
+1. `getting-started/installation.md`
+2. `getting-started/quickstart.md`
+3. `getting-started/usage.md`
+
+Contributors should continue with:
+
+1. `developer-guide/architecture.md`
+2. `developer-guide/local-development.md`
+3. `developer-guide/testing.md`
+
+---
+
+# Final Philosophy
+
+Aniwa exists to help people:
+
+```text
+understand data clearly, confidently, and intelligently
+```
