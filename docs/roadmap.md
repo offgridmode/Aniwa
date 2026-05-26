@@ -814,7 +814,7 @@ the long-term architectural evolution plan for the ecosystem
 Aniwa’s roadmap exists to ensure that:
 
 ```text
-the ecosystem evolves intentionally, sustainably, intelligently, and scalably over the coming decades
+the ecosystem evolves intentionally, sustainably, intelligently, and scalably over the coming decades.
 ```
 
 ---
