@@ -24,6 +24,10 @@ Aniwa helps users quickly understand datasets through:
 
 Whether you're working with CSV files, Excel spreadsheets, JSON datasets, or Parquet files, Aniwa provides a fast and elegant way to inspect, understand, and trust your data.
 
+
+Full documentation available here:
+https://reginalderzoah.github.io/Aniwa/
+
 ---
 
 # Current Version
@@ -282,8 +286,9 @@ aniwa customers.csv --exclude statistics
 # Documentation
 
 Aniwa now includes a full documentation system.
-Full documentation available here:
 
+Full documentation available here:
+https://reginalderzoah.github.io/Aniwa/
 
 Documentation includes:
 
