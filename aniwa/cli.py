@@ -9,7 +9,7 @@ import polars as pl
 import typer
 
 from aniwa import __version__
-from aniwa.config import get_flattened_config
+from aniwa.config_loader import get_flattened_config
 from aniwa.core.profiler import profile_dataframe
 from aniwa.io.readers import read_dataset
 from aniwa.models.enums import ReportSection
