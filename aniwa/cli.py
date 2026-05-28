@@ -476,7 +476,7 @@ def profile(
             json_output = render_json_report(dataset_profile, final_output)
 
             if final_output:
-                console.print(f"[green]✓[/green] JSON report written to {final_output}")
+                console.print(f"[green][/green] JSON report written to {final_output}")
             else:
                 typer.echo(json_output)
 
@@ -489,7 +489,7 @@ def profile(
             except ValueError as exc:
                 raise typer.BadParameter(str(exc)) from exc
 
-        console.print(f"[green]✓[/green] HTML report written to {final_output}")
+        console.print(f"[green][/green] HTML report written to {final_output}")
         return
 
     if resolved_report == ReportFormat.excel:
@@ -499,7 +499,7 @@ def profile(
             except ValueError as exc:
                 raise typer.BadParameter(str(exc)) from exc
 
-        console.print(f"[green]✓[/green] Excel report written to {final_output}")
+        console.print(f"[green][/green] Excel report written to {final_output}")
         return
 
     if resolved_report == ReportFormat.markdown:
@@ -507,7 +507,7 @@ def profile(
             markdown_output = render_markdown_report(dataset_profile, final_output)
 
             if final_output:
-                console.print(f"[green]✓[/green] Markdown report written to {final_output}")
+                console.print(f"[green][/green] Markdown report written to {final_output}")
             else:
                 typer.echo(markdown_output)
 
@@ -520,12 +520,12 @@ def profile(
             except ValueError as exc:
                 raise typer.BadParameter(str(exc)) from exc
 
-        console.print(f"[green]✓[/green] PDF report written to {final_output}")
+        console.print(f"[green][/green] PDF report written to {final_output}")
         return
     
     # Show final completion message
     if resolved_verbose:
-        console.print(f"\n[bold green]✓ Profiling complete for {path}[/bold green]")
+        console.print(f"\n[bold green] Profiling complete for {path}[/bold green]")
         if final_output:
             console.print(f"[dim]Report saved to: {final_output}[/dim]")
 

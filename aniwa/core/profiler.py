@@ -73,6 +73,7 @@ def profile_dataframe(
                 mode=mode,
                 include_statistics=ReportSection.statistics in sections,
                 progress_callback=progress_callback,
+                verbose=verbose,
             )
 
     displayed_columns = None
@@ -82,6 +83,7 @@ def profile_dataframe(
             rows=rows,
             mode=mode,
             include_statistics=ReportSection.statistics in sections,
+            verbose=verbose,
         )
 
     duplicate_rows = 0
@@ -161,6 +163,7 @@ def _profile_columns(
     mode: str,
     include_statistics: bool,
     progress_callback: Optional[Callable[[int], None]] = None,
+    verbose: bool = False,
 ) -> list[ColumnProfile]:
     """Profile all columns with optional progress callback.
     
@@ -170,6 +173,7 @@ def _profile_columns(
         mode: Profiling mode
         include_statistics: Whether to compute numeric statistics
         progress_callback: Optional callback to advance progress bar
+        verbose: Enable detailed progress output
     
     Returns:
         List of ColumnProfile objects
@@ -187,14 +191,22 @@ def _profile_columns(
         numeric_stats = None
 
         if include_statistics and mode == "deep" and series.dtype in NUMERIC_DTYPES:
-            with tracker.stage(f"Computing statistics for {col}"):
-                numeric_stats = NumericStats(
-                    min=_safe_float(series.min()),
-                    max=_safe_float(series.max()),
-                    mean=_safe_float(series.mean()),
-                    median=_safe_float(series.median()),
-                    std=_safe_float(series.std()),
-                )
+            # Compute statistics without nested progress tracking
+            if verbose:
+                from rich.console import Console
+                console = Console()
+                console.print(f"[dim]    Computing stats for {col}...[/dim]")
+            
+            numeric_stats = NumericStats(
+                min=_safe_float(series.min()),
+                max=_safe_float(series.max()),
+                mean=_safe_float(series.mean()),
+                median=_safe_float(series.median()),
+                std=_safe_float(series.std()),
+            )
+            
+            if verbose:
+                console.print(f"[dim]     Stats for {col} complete[/dim]")
 
         column_profiles.append(
             ColumnProfile(
