@@ -7,6 +7,7 @@ from typing import Any
 
 import polars as pl
 import typer
+from rich.console import Console
 
 from aniwa import __version__
 from aniwa.config_loader import get_flattened_config
@@ -20,9 +21,11 @@ from aniwa.reports.html_report import render_html_report
 from aniwa.reports.json_report import render_json_report
 from aniwa.reports.markdown_report import render_markdown_report
 from aniwa.reports.pdf_report import render_pdf_report
+from aniwa.utils.progress import ProgressTracker
 
 
 app = typer.Typer(help="Aniwa - Universal dataset profiling and intelligence.")
+console = Console()
 
 
 CONFIG_FILE_NAMES = (
@@ -348,6 +351,12 @@ def profile(
         "-t",
         help="Report template for HTML/PDF outputs. Options: default, clean, compact, enterprise, dark.",
     ),
+    verbose: bool = typer.Option(
+        False,
+        "--verbose",
+        "-v",
+        help="Show detailed progress information and timing.",
+    ),
 ):
     """
     Profile a dataset.
@@ -391,6 +400,12 @@ def profile(
         if exclude is not None
         else active_config.get("exclude")
     )
+    
+    resolved_verbose = (
+        verbose
+        if verbose is not None
+        else active_config.get("verbose", False)
+    )
 
     if include is not None:
         resolved_exclude = None
@@ -416,16 +431,23 @@ def profile(
     if not dataset_path.exists():
         raise typer.BadParameter(f"File does not exist: {path}")
 
+    # Initialize progress tracker
+    tracker = ProgressTracker(verbose=resolved_verbose)
+    
+    # Start profiling with progress tracking
     start_time = time.perf_counter()
-
-    df = read_dataset(path)
-
-    dataset_profile = profile_dataframe(
-        df,
-        mode=resolved_mode.value,
-        sections=sections,
-    )
-
+    
+    with tracker.stage("Reading dataset"):
+        df = read_dataset(path)
+    
+    with tracker.stage(f"Profiling dataset in {resolved_mode.value} mode"):
+        dataset_profile = profile_dataframe(
+            df,
+            mode=resolved_mode.value,
+            sections=sections,
+            verbose=resolved_verbose,
+        )
+    
     duration_seconds = time.perf_counter() - start_time
 
     dataset_profile.metadata = build_profile_metadata(
@@ -443,53 +465,70 @@ def profile(
         config_file=config_file,
     )
 
+    # Report generation with progress tracking
     if resolved_report == ReportFormat.console:
-        render_console_report(dataset_profile)
+        with tracker.stage("Generating console report"):
+            render_console_report(dataset_profile, verbose=resolved_verbose)
         return
 
     if resolved_report == ReportFormat.json:
-        json_output = render_json_report(dataset_profile, final_output)
+        with tracker.stage("Generating JSON report"):
+            json_output = render_json_report(dataset_profile, final_output)
 
-        if final_output:
-            typer.echo(f"JSON report written to {final_output}")
-        else:
-            typer.echo(json_output)
+            if final_output:
+                console.print(f"[green]✓[/green] JSON report written to {final_output}")
+            else:
+                typer.echo(json_output)
 
         return
 
     if resolved_report == ReportFormat.html:
-        try:
-            render_html_report(dataset_profile, final_output, template=resolved_template)
-        except ValueError as exc:
-            raise typer.BadParameter(str(exc)) from exc
+        with tracker.stage("Generating HTML report"):
+            try:
+                render_html_report(dataset_profile, final_output, template=resolved_template)
+            except ValueError as exc:
+                raise typer.BadParameter(str(exc)) from exc
 
-        typer.echo(f"HTML report written to {final_output}")
+        console.print(f"[green]✓[/green] HTML report written to {final_output}")
         return
 
     if resolved_report == ReportFormat.excel:
-        try:
-            render_excel_report(dataset_profile, final_output)
-        except ValueError as exc:
-            raise typer.BadParameter(str(exc)) from exc
+        with tracker.stage("Generating Excel report"):
+            try:
+                render_excel_report(dataset_profile, final_output)
+            except ValueError as exc:
+                raise typer.BadParameter(str(exc)) from exc
 
-        typer.echo(f"Excel report written to {final_output}")
+        console.print(f"[green]✓[/green] Excel report written to {final_output}")
         return
 
     if resolved_report == ReportFormat.markdown:
-        markdown_output = render_markdown_report(dataset_profile, final_output)
+        with tracker.stage("Generating Markdown report"):
+            markdown_output = render_markdown_report(dataset_profile, final_output)
 
-        if final_output:
-            typer.echo(f"Markdown report written to {final_output}")
-        else:
-            typer.echo(markdown_output)
+            if final_output:
+                console.print(f"[green]✓[/green] Markdown report written to {final_output}")
+            else:
+                typer.echo(markdown_output)
 
         return
 
     if resolved_report == ReportFormat.pdf:
-        try:
-            render_pdf_report(dataset_profile, final_output, template=resolved_template)
-        except ValueError as exc:
-            raise typer.BadParameter(str(exc)) from exc
+        with tracker.stage("Generating PDF report"):
+            try:
+                render_pdf_report(dataset_profile, final_output, template=resolved_template)
+            except ValueError as exc:
+                raise typer.BadParameter(str(exc)) from exc
 
-        typer.echo(f"PDF report written to {final_output}")
+        console.print(f"[green]✓[/green] PDF report written to {final_output}")
         return
+    
+    # Show final completion message
+    if resolved_verbose:
+        console.print(f"\n[bold green]✓ Profiling complete for {path}[/bold green]")
+        if final_output:
+            console.print(f"[dim]Report saved to: {final_output}[/dim]")
+
+
+if __name__ == "__main__":
+    app()

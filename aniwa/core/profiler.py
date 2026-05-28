@@ -1,4 +1,5 @@
 import polars as pl
+from typing import Callable, Optional
 
 from aniwa.models.enums import ReportSection
 from aniwa.models.profile import (
@@ -9,6 +10,7 @@ from aniwa.models.profile import (
     NumericStats,
     QualityProfile,
 )
+from aniwa.utils.progress import ProgressTracker
 
 
 NUMERIC_DTYPES = {
@@ -29,28 +31,49 @@ def profile_dataframe(
     df: pl.DataFrame,
     mode: str = "deep",
     sections: set[ReportSection] | None = None,
+    verbose: bool = False,
 ) -> DatasetProfile:
+    """Profile a DataFrame with optional progress tracking.
+    
+    Args:
+        df: Polars DataFrame to profile
+        mode: Profiling mode ("fast" or "deep")
+        sections: Report sections to include
+        verbose: Enable detailed progress output
+    
+    Returns:
+        DatasetProfile containing all profiling results
+    """
     if sections is None:
         sections = set(ReportSection)
 
     rows = df.height
     column_count = df.width
+    
+    # Initialize progress tracker
+    tracker = ProgressTracker(verbose=verbose)
 
     summary = None
     if ReportSection.summary in sections:
-        summary = DatasetSummary(
-            rows=rows,
-            columns=column_count,
-        )
+        with tracker.stage("Generating dataset summary"):
+            summary = DatasetSummary(
+                rows=rows,
+                columns=column_count,
+            )
 
     analysis_columns = None
     if _needs_column_analysis(sections):
-        analysis_columns = _profile_columns(
-            df=df,
-            rows=rows,
-            mode=mode,
-            include_statistics=ReportSection.statistics in sections,
-        )
+        with tracker.stage(
+            "Analyzing columns", 
+            total_steps=len(df.columns) if verbose else None
+        ) as progress_callback:
+            analysis_columns = _profile_columns(
+                df=df,
+                rows=rows,
+                mode=mode,
+                include_statistics=ReportSection.statistics in sections,
+                progress_callback=progress_callback,
+            )
 
     displayed_columns = None
     if _should_display_columns(sections):
@@ -65,23 +88,30 @@ def profile_dataframe(
     duplicate_percent = 0.0
 
     if _needs_duplicate_analysis(sections):
-        duplicate_rows = rows - df.unique().height
-        duplicate_percent = round((duplicate_rows / rows) * 100, 2) if rows else 0.0
+        with tracker.stage("Detecting duplicate rows"):
+            duplicate_rows = rows - df.unique().height
+            duplicate_percent = round((duplicate_rows / rows) * 100, 2) if rows else 0.0
 
     quality = None
     if ReportSection.quality in sections:
-        quality = QualityProfile(
-            duplicate_rows=duplicate_rows,
-            duplicate_percent=duplicate_percent,
-        )
+        with tracker.stage("Building quality profile"):
+            quality = QualityProfile(
+                duplicate_rows=duplicate_rows,
+                duplicate_percent=duplicate_percent,
+            )
 
     insights = None
     if ReportSection.insights in sections:
-        insights = generate_insights(
-            columns=analysis_columns or [],
-            duplicate_rows=duplicate_rows,
-            total_rows=rows,
-        )
+        with tracker.stage("Generating insights"):
+            insights = generate_insights(
+                columns=analysis_columns or [],
+                duplicate_rows=duplicate_rows,
+                total_rows=rows,
+            )
+
+    # Show timing summary if verbose
+    if verbose:
+        tracker.show_timing_summary()
 
     return DatasetProfile(
         summary=summary,
@@ -130,10 +160,24 @@ def _profile_columns(
     rows: int,
     mode: str,
     include_statistics: bool,
+    progress_callback: Optional[Callable[[int], None]] = None,
 ) -> list[ColumnProfile]:
+    """Profile all columns with optional progress callback.
+    
+    Args:
+        df: Polars DataFrame
+        rows: Total row count
+        mode: Profiling mode
+        include_statistics: Whether to compute numeric statistics
+        progress_callback: Optional callback to advance progress bar
+    
+    Returns:
+        List of ColumnProfile objects
+    """
     column_profiles: list[ColumnProfile] = []
+    total_columns = len(df.columns)
 
-    for col in df.columns:
+    for idx, col in enumerate(df.columns):
         series = df[col]
 
         null_count = series.null_count()
@@ -143,13 +187,14 @@ def _profile_columns(
         numeric_stats = None
 
         if include_statistics and mode == "deep" and series.dtype in NUMERIC_DTYPES:
-            numeric_stats = NumericStats(
-                min=_safe_float(series.min()),
-                max=_safe_float(series.max()),
-                mean=_safe_float(series.mean()),
-                median=_safe_float(series.median()),
-                std=_safe_float(series.std()),
-            )
+            with tracker.stage(f"Computing statistics for {col}"):
+                numeric_stats = NumericStats(
+                    min=_safe_float(series.min()),
+                    max=_safe_float(series.max()),
+                    mean=_safe_float(series.mean()),
+                    median=_safe_float(series.median()),
+                    std=_safe_float(series.std()),
+                )
 
         column_profiles.append(
             ColumnProfile(
@@ -161,6 +206,10 @@ def _profile_columns(
                 numeric_stats=numeric_stats,
             )
         )
+        
+        # Advance progress bar if callback provided
+        if progress_callback:
+            progress_callback(1)
 
     return column_profiles
 
@@ -180,6 +229,7 @@ def generate_insights(
     duplicate_rows: int,
     total_rows: int,
 ) -> list[Insight]:
+    """Generate insights from profiling data."""
     insights: list[Insight] = []
 
     if duplicate_rows > 0:
