@@ -22,6 +22,7 @@ from aniwa.reports.json_report import render_json_report
 from aniwa.reports.markdown_report import render_markdown_report
 from aniwa.reports.pdf_report import render_pdf_report
 from aniwa.utils.progress import ProgressTracker
+from aniwa.utils.logging import configure_logger, VerbosityLevel, get_logger, log_debug, log_info, log_success, log_verbose, log_warning
 
 
 app = typer.Typer(help="Aniwa - Universal dataset profiling and intelligence.")
@@ -225,6 +226,7 @@ def build_command_used(
     exclude: str | None,
     template: str,
     config_file: str | None,
+    verbosity: VerbosityLevel,
 ) -> str:
     command_parts = ["aniwa", path]
 
@@ -251,6 +253,9 @@ def build_command_used(
 
     if report in {ReportFormat.html, ReportFormat.pdf} and template != "default":
         command_parts.extend(["--template", template])
+    
+    if verbosity != VerbosityLevel.NORMAL:
+        command_parts.extend(["--verbosity", verbosity.value])
 
     return " ".join(command_parts)
 
@@ -268,6 +273,7 @@ def build_profile_metadata(
     exclude: str | None,
     duration_seconds: float,
     config_file: str | None,
+    verbosity: VerbosityLevel,
 ) -> ProfileMetadata:
     include_sections = validate_sections(include)
     exclude_sections = validate_sections(exclude)
@@ -297,6 +303,7 @@ def build_profile_metadata(
             exclude=exclude,
             template=template,
             config_file=config_file,
+            verbosity=verbosity,
         ),
     )
 
@@ -351,31 +358,46 @@ def profile(
         "-t",
         help="Report template for HTML/PDF outputs. Options: default, clean, compact, enterprise, dark.",
     ),
-    verbose: bool = typer.Option(
-        False,
-        "--verbose",
-        "-v",
-        help="Show detailed progress information and timing.",
+    verbosity: VerbosityLevel = typer.Option(
+        VerbosityLevel.NORMAL,
+        "--verbosity",
+        help="Verbosity level: quiet, normal, verbose, debug",
     ),
 ):
     """
     Profile a dataset.
     """
+    # Configure logging first thing
+    configure_logger(verbosity)
+    logger = get_logger()
+    
+    # Log debug information
+    log_debug("Starting Aniwa profiling", {
+        "version": __version__,
+        "python_version": platform.python_version(),
+        "verbosity": verbosity.value,
+        "command": f"aniwa profile {path}",
+    })
+    
     active_config = load_active_config(config_file)
+    log_debug("Configuration loaded", active_config if verbosity == VerbosityLevel.DEBUG else None)
 
     resolved_report = resolve_report_format(
         report if report is not None else active_config.get("report")
     )
+    log_debug("Report format resolved", {"format": resolved_report.value})
 
     resolved_mode = resolve_profile_mode(
         mode if mode is not None else active_config.get("mode")
     )
+    log_debug("Profiling mode resolved", {"mode": resolved_mode.value})
 
     resolved_template = (
         template
         if template is not None
         else active_config.get("template", "default")
     )
+    log_debug("Template resolved", {"template": resolved_template})
 
     resolved_output = (
         output
@@ -400,12 +422,6 @@ def profile(
         if exclude is not None
         else active_config.get("exclude")
     )
-    
-    resolved_verbose = (
-        verbose
-        if verbose is not None
-        else active_config.get("verbose", False)
-    )
 
     if include is not None:
         resolved_exclude = None
@@ -417,38 +433,62 @@ def profile(
         resolved_include,
         resolved_exclude,
     )
+    
+    log_debug("Sections resolved", {
+        "sections": [s.value for s in sections],
+        "include": resolved_include,
+        "exclude": resolved_exclude,
+    })
 
     final_output = resolve_output_path(
         output=resolved_output,
         output_dir=resolved_output_dir,
         report=resolved_report,
     )
+    log_debug("Output path resolved", {"output": final_output})
 
     ensure_output_parent(final_output)
 
     dataset_path = Path(path)
 
     if not dataset_path.exists():
+        log_error(f"File does not exist: {path}")
         raise typer.BadParameter(f"File does not exist: {path}")
 
+    # Determine if we should show verbose progress (verbose or debug mode)
+    show_verbose_progress = verbosity in [VerbosityLevel.VERBOSE, VerbosityLevel.DEBUG]
+    
     # Initialize progress tracker
-    tracker = ProgressTracker(verbose=resolved_verbose)
+    tracker = ProgressTracker(verbose=show_verbose_progress)
     
     # Start profiling with progress tracking
     start_time = time.perf_counter()
     
+    # Show reading dataset message based on verbosity
+    if verbosity != VerbosityLevel.QUIET:
+        log_info(f"Reading dataset: {path}")
+    
     with tracker.stage("Reading dataset"):
         df = read_dataset(path)
+        log_debug("Dataset loaded", {
+            "rows": df.height,
+            "columns": df.width,
+            "shape": f"{df.height} x {df.width}",
+        })
+    
+    if verbosity != VerbosityLevel.QUIET:
+        log_info(f"Profiling dataset in {resolved_mode.value} mode")
     
     with tracker.stage(f"Profiling dataset in {resolved_mode.value} mode"):
         dataset_profile = profile_dataframe(
             df,
             mode=resolved_mode.value,
             sections=sections,
-            verbose=resolved_verbose,
+            verbose=show_verbose_progress,
         )
     
     duration_seconds = time.perf_counter() - start_time
+    log_debug(f"Profiling completed in {duration_seconds:.2f}s")
 
     dataset_profile.metadata = build_profile_metadata(
         dataset_path=dataset_path,
@@ -463,71 +503,101 @@ def profile(
         exclude=resolved_exclude,
         duration_seconds=duration_seconds,
         config_file=config_file,
+        verbosity=verbosity,
     )
 
     # Report generation with progress tracking
     if resolved_report == ReportFormat.console:
+        if verbosity != VerbosityLevel.QUIET:
+            log_info("Generating console report")
         with tracker.stage("Generating console report"):
-            render_console_report(dataset_profile, verbose=resolved_verbose)
+            render_console_report(dataset_profile, verbose=show_verbose_progress)
+        if verbosity != VerbosityLevel.QUIET:
+            log_success("Console report generated")
         return
 
     if resolved_report == ReportFormat.json:
+        if verbosity != VerbosityLevel.QUIET:
+            log_info("Generating JSON report")
         with tracker.stage("Generating JSON report"):
             json_output = render_json_report(dataset_profile, final_output)
 
             if final_output:
-                console.print(f"[green][/green] JSON report written to {final_output}")
+                if verbosity != VerbosityLevel.QUIET:
+                    log_success(f"JSON report written to {final_output}")
             else:
                 typer.echo(json_output)
 
         return
 
     if resolved_report == ReportFormat.html:
+        if verbosity != VerbosityLevel.QUIET:
+            log_info("Generating HTML report")
         with tracker.stage("Generating HTML report"):
             try:
                 render_html_report(dataset_profile, final_output, template=resolved_template)
             except ValueError as exc:
+                log_error(f"Failed to generate HTML report: {exc}")
                 raise typer.BadParameter(str(exc)) from exc
 
-        console.print(f"[green][/green] HTML report written to {final_output}")
+        if verbosity != VerbosityLevel.QUIET:
+            log_success(f"HTML report written to {final_output}")
         return
 
     if resolved_report == ReportFormat.excel:
+        if verbosity != VerbosityLevel.QUIET:
+            log_info("Generating Excel report")
         with tracker.stage("Generating Excel report"):
             try:
                 render_excel_report(dataset_profile, final_output)
             except ValueError as exc:
+                log_error(f"Failed to generate Excel report: {exc}")
                 raise typer.BadParameter(str(exc)) from exc
 
-        console.print(f"[green][/green] Excel report written to {final_output}")
+        if verbosity != VerbosityLevel.QUIET:
+            log_success(f"Excel report written to {final_output}")
         return
 
     if resolved_report == ReportFormat.markdown:
+        if verbosity != VerbosityLevel.QUIET:
+            log_info("Generating Markdown report")
         with tracker.stage("Generating Markdown report"):
             markdown_output = render_markdown_report(dataset_profile, final_output)
 
             if final_output:
-                console.print(f"[green][/green] Markdown report written to {final_output}")
+                if verbosity != VerbosityLevel.QUIET:
+                    log_success(f"Markdown report written to {final_output}")
             else:
                 typer.echo(markdown_output)
 
         return
 
     if resolved_report == ReportFormat.pdf:
+        if verbosity != VerbosityLevel.QUIET:
+            log_info("Generating PDF report")
         with tracker.stage("Generating PDF report"):
             try:
                 render_pdf_report(dataset_profile, final_output, template=resolved_template)
             except ValueError as exc:
+                log_error(f"Failed to generate PDF report: {exc}")
                 raise typer.BadParameter(str(exc)) from exc
 
-        console.print(f"[green][/green] PDF report written to {final_output}")
+        if verbosity != VerbosityLevel.QUIET:
+            log_success(f"PDF report written to {final_output}")
         return
     
-    # Show final completion message
-    if resolved_verbose:
+    # Show final completion message (always in quiet mode, show in others)
+    if verbosity == VerbosityLevel.QUIET:
+        # Only show essential info in quiet mode
+        console.print(f"{path}")
+    else:
         console.print(f"\n[bold green] Profiling complete for {path}[/bold green]")
         if final_output:
             console.print(f"[dim]Report saved to: {final_output}[/dim]")
+    
+    # Show timing summary in verbose or debug mode
+    if show_verbose_progress:
+        tracker.show_timing_summary()
 
 
 if __name__ == "__main__":
