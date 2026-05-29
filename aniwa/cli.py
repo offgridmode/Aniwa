@@ -22,7 +22,7 @@ from aniwa.reports.json_report import render_json_report
 from aniwa.reports.markdown_report import render_markdown_report
 from aniwa.reports.pdf_report import render_pdf_report
 from aniwa.utils.progress import ProgressTracker
-from aniwa.utils.logging import configure_logger, VerbosityLevel, get_logger, log_debug, log_info, log_success, log_verbose, log_warning
+from aniwa.utils.logging import configure_logger, VerbosityLevel, get_logger, log_debug, log_info, log_success, log_verbose, log_warning, log_error
 
 
 app = typer.Typer(help="Aniwa - Universal dataset profiling and intelligence.")
@@ -591,7 +591,7 @@ def profile(
         # Only show essential info in quiet mode
         console.print(f"{path}")
     else:
-        console.print(f"\n[bold green] Profiling complete for {path}[/bold green]")
+        console.print(f"\n[bold green]✓ Profiling complete for {path}[/bold green]")
         if final_output:
             console.print(f"[dim]Report saved to: {final_output}[/dim]")
     

@@ -72,7 +72,7 @@ class ProgressTracker:
                         elapsed = perf_counter() - start
                         self.timings[name] = elapsed
                         # Show completion with timing
-                        console.print(f"[dim]  {name} completed in {self._format_time(elapsed)}[/dim]")
+                        console.print(f"[dim]   {name} completed in {self._format_time(elapsed)}[/dim]")
             else:
                 # Show indeterminate spinner for operations without steps
                 # or when total_steps is too large (avoid performance issues)
@@ -138,6 +138,19 @@ class ProgressTracker:
         self.timings = {}
 
 
+# Helper function for consistent time formatting (available globally)
+def format_duration(seconds: float) -> str:
+    """Format time duration appropriately (standalone function)."""
+    if seconds < 0.001:
+        return f"{seconds*1000000:.0f}µs"
+    elif seconds < 0.01:
+        return f"{seconds*1000:.2f}ms"
+    elif seconds < 1:
+        return f"{seconds*1000:.0f}ms"
+    else:
+        return f"{seconds:.2f}s"
+
+
 # Helper context manager for simple operations
 @contextmanager
 def show_progress(message: str, verbose: bool = True):
@@ -167,17 +180,5 @@ def show_progress(message: str, verbose: bool = True):
             yield
         finally:
             elapsed = perf_counter() - start
-            logger.debug(f"Operation completed: {message} in {self._format_time(elapsed)}")
-
-
-# Helper function for consistent time formatting (available globally)
-def format_duration(seconds: float) -> str:
-    """Format time duration appropriately (standalone function)."""
-    if seconds < 0.001:
-        return f"{seconds*1000000:.0f}µs"
-    elif seconds < 0.01:
-        return f"{seconds*1000:.2f}ms"
-    elif seconds < 1:
-        return f"{seconds*1000:.0f}ms"
-    else:
-        return f"{seconds:.2f}s"
+            # Use the standalone format_duration function, not self._format_time
+            logger.debug(f"Operation completed: {message} in {format_duration(elapsed)}")
