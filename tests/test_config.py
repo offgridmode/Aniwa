@@ -1,6 +1,6 @@
 import pytest
 import yaml
-from aniwa.config import get_flattened_config
+from aniwa.config_loader import get_flattened_config
 
 def test_load_yaml_config(tmp_path):
     d = tmp_path / "aniwa.yaml"
