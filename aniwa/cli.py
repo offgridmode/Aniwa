@@ -3,11 +3,12 @@ import time
 from datetime import datetime, timezone
 from enum import Enum
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 import polars as pl
 import typer
 from rich.console import Console
+from rich.table import Table
 
 from aniwa import __version__
 from aniwa.config_loader import get_flattened_config
@@ -23,6 +24,7 @@ from aniwa.reports.markdown_report import render_markdown_report
 from aniwa.reports.pdf_report import render_pdf_report
 from aniwa.utils.progress import ProgressTracker
 from aniwa.utils.logging import configure_logger, VerbosityLevel, get_logger, log_debug, log_info, log_success, log_verbose, log_warning, log_error
+from aniwa.presets import apply_preset, list_presets, get_preset
 
 
 app = typer.Typer(help="Aniwa - Universal dataset profiling and intelligence.")
@@ -227,8 +229,12 @@ def build_command_used(
     template: str,
     config_file: str | None,
     verbosity: VerbosityLevel,
+    preset: Optional[str] = None,
 ) -> str:
     command_parts = ["aniwa", path]
+
+    if preset:
+        command_parts.extend(["--preset", preset])
 
     if config_file:
         command_parts.extend(["--config", config_file])
@@ -274,6 +280,7 @@ def build_profile_metadata(
     duration_seconds: float,
     config_file: str | None,
     verbosity: VerbosityLevel,
+    preset: Optional[str] = None,
 ) -> ProfileMetadata:
     include_sections = validate_sections(include)
     exclude_sections = validate_sections(exclude)
@@ -304,6 +311,7 @@ def build_profile_metadata(
             template=template,
             config_file=config_file,
             verbosity=verbosity,
+            preset=preset,
         ),
     )
 
@@ -316,6 +324,12 @@ def profile(
         "--config",
         "-c",
         help="Path to configuration file.",
+    ),
+    preset: Optional[str] = typer.Option(
+        None,
+        "--preset",
+        "-p",
+        help="Profiling preset: quick, standard, audit, enterprise",
     ),
     report: ReportFormat | None = typer.Option(
         None,
@@ -376,12 +390,49 @@ def profile(
         "version": __version__,
         "python_version": platform.python_version(),
         "verbosity": verbosity.value,
+        "preset": preset,
         "command": f"aniwa profile {path}",
     })
     
+    # Load config file
     active_config = load_active_config(config_file)
     log_debug("Configuration loaded", active_config if verbosity == VerbosityLevel.DEBUG else None)
+    
+    # Apply preset if specified (before resolving other options)
+    if preset:
+        # Validate preset exists
+        preset_obj = get_preset(preset)
+        if not preset_obj:
+            available_presets = ", ".join(list_presets().keys())
+            raise typer.BadParameter(
+                f"Unknown preset: '{preset}'. Available presets: {available_presets}"
+            )
+        
+        # Collect CLI args that are not None
+        cli_args = {}
+        if mode is not None:
+            cli_args["mode"] = mode.value
+        if report is not None:
+            cli_args["report"] = report.value
+        if template is not None:
+            cli_args["template"] = template
+        if include is not None:
+            cli_args["include"] = include
+        if exclude is not None:
+            cli_args["exclude"] = exclude
+        if verbosity != VerbosityLevel.NORMAL:
+            cli_args["verbosity"] = verbosity.value
+        
+        # Apply preset (preset values + CLI overrides)
+        preset_config = apply_preset(preset, cli_args)
+        log_debug(f"Applied preset: {preset}", preset_config)
+        
+        # Update active_config with preset values (CLI will still override later)
+        for key, value in preset_config.items():
+            if value is not None:
+                active_config[key] = value
 
+    # Resolve configuration (preset values are now in active_config)
     resolved_report = resolve_report_format(
         report if report is not None else active_config.get("report")
     )
@@ -422,6 +473,16 @@ def profile(
         if exclude is not None
         else active_config.get("exclude")
     )
+    
+    # Get verbosity from preset if not overridden by CLI
+    if verbosity == VerbosityLevel.NORMAL and active_config.get("verbosity"):
+        try:
+            resolved_verbosity = VerbosityLevel(active_config.get("verbosity"))
+            configure_logger(resolved_verbosity)
+            logger = get_logger()
+            verbosity = resolved_verbosity
+        except ValueError:
+            pass
 
     if include is not None:
         resolved_exclude = None
@@ -504,6 +565,7 @@ def profile(
         duration_seconds=duration_seconds,
         config_file=config_file,
         verbosity=verbosity,
+        preset=preset,
     )
 
     # Report generation with progress tracking
@@ -598,6 +660,30 @@ def profile(
     # Show timing summary in verbose or debug mode
     if show_verbose_progress:
         tracker.show_timing_summary()
+
+
+@app.command(name="list-presets")
+def list_presets_cmd():
+    """List available profiling presets."""
+    presets = list_presets()
+    
+    if not presets:
+        console.print("[yellow]No presets available[/yellow]")
+        return
+    
+    table = Table(title="Available Presets", border_style="cyan")
+    table.add_column("Preset", style="bold cyan")
+    table.add_column("Description", style="green")
+    
+    for name, description in presets.items():
+        table.add_row(name, description)
+    
+    console.print(table)
+    
+    # Show usage example
+    console.print("\n[dim]Usage example:[/dim]")
+    console.print("[dim]  aniwa profile data.csv --preset quick[/dim]")
+    console.print("[dim]  aniwa profile data.csv --preset enterprise --mode fast[/dim]")
 
 
 if __name__ == "__main__":
