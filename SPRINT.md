@@ -81,7 +81,7 @@ git rebase --abort   # Go back to before rebase
 
 ---
 
-## One Page Summary
+## Summary
 
 | Step | Command |
 |------|---------|
