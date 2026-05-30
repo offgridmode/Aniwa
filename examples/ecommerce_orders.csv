@@ -1,0 +1,159 @@
+order_id,customer_name,email,phone,product_name,category,quantity,unit_price,order_date,delivery_city,order_status
+ORD1001,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Wireless Mouse,Electronics,1,799,2026-01-01,Mumbai,Delivered
+ORD1002,Priya Verma,priya.verma@yahoo.com,9988776655.0,Bluetooth Speaker,Electronics,2,2499,2026-01-02,Delhi,Shipped
+ORD1003,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Office Chair,Furniture,3,5999,2026-01-03,Bengaluru,Processing
+ORD1004,Neha Singh,neha.singh@gmail.com,9012345678.0,Cotton T-Shirt,Fashion,4,599,2026-01-04,Kolkata,Cancelled
+ORD1005,Vikram Rao,,9988123456.0,Water Bottle,Home & Kitchen,5,349,2026-01-05,,Delivered
+ORD1006,Ananya Das,ananya.das@gmail.com,9876501234.0,Notebook Pack,Stationery,two,120,2026-01-06,Chennai,Shipped
+ORD1007,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Laptop Stand,Electronics,2,1599,2026-01-07,Pune,Processing
+ORD1008,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Coffee Mug,Home & Kitchen,3,299,2026-01-08,Jaipur,Cancelled
+ORD1009,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Running Shoes,Fashion,4,3499,2026-01-09,Kochi,Delivered
+ORD1010,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,LED Monitor,Electronics,5,12999,2026-01-10,Noida,Shipped
+ORD1011,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Smart Watch,Electronics,1,6999,2026-01-11,Mumbai,Processing
+ORD1012,Priya Verma,priya.verma@yahoo.com,9988776655.0,Air Fryer,Home Appliances,2,6999,2026-01-12,Delhi,Cancelled
+ORD1013,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Gaming Chair,,3,unknown,2026-01-13,,Delivered
+ORD1014,Neha Singh,neha.singh@gmail.com,9012345678.0,Protein Powder,Fitness,4,3499,2026-01-14,Kolkata,Shipped
+ORD1015,Vikram Rao,,9988123456.0,Digital Camera,Electronics,5,45999,2026-01-15,Hyderabad,Processing
+ORD1016,Ananya Das,ananya.das@gmail.com,9876501234.0,Wireless Mouse,electronics,1,799,2026-01-16,Chennai,Cancelled
+ORD1017,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Bluetooth Speaker,ELECTRONICS,2,2499,2026-01-17,Pune,Delivered
+ORD1018,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Office Chair,Furniture,3,5999,2026-01-18, mumbai ,Shipped
+ORD1019,aarav sharma,aditya.nair@gmail.com,9812345678.0,Cotton T-Shirt,Fashion,4,599,2026-01-19,Kochi,Processing
+ORD1020,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Water Bottle,Home & Kitchen,5,349,2026-01-20,Noida,Cancelled
+ORD1021,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Notebook Pack,Stationery,1,120,2026-01-21,Mumbai,Delivered
+ORD1022,Priya Verma,priya.verma@yahoo.com,9988776655.0,Laptop Stand,Electronics,2,1599,2026-01-22,Delhi,Shipped
+ORD1023,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Coffee Mug,Home & Kitchen,3,299,2026-01-23,Bengaluru,Processing
+ORD1024,Neha Singh,neha.singh@gmail.com,9012345678.0,Running Shoes,Fashion,4,3499,2026-01-24,Kolkata,Cancelled
+ORD1025,Vikram Rao,,9988123456.0,LED Monitor,Electronics,5,12999,2026-01-25,Hyderabad,Delivered
+ORD1026,Ananya Das,ananya.das@gmail.com,N/A,Smart Watch,Electronics,1,6999,2026-01-26,Chennai,Shipped
+ORD1027,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Air Fryer,Home Appliances,2,6999,2026-01-27,Pune,Processing
+ORD1028,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Gaming Chair,Furniture,3,10999,2026-01-28,Jaipur,Cancelled
+ORD1029,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Protein Powder,Fitness,4,3499,2026-02-01,Kochi,Delivered
+ORD1030,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Digital Camera,Electronics,5,45999,2026-02-02,Noida,Shipped
+ORD1031,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Wireless Mouse,Electronics,1,799,2026-02-03,Mumbai,Processing
+ORD1032,Priya Verma,priya.verma@yahoo.com,9988776655.0,Bluetooth Speaker,Electronics,2,2499,2026-02-04,Delhi,Cancelled
+ORD1033,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Office Chair,Furniture,3,5999,2026-02-05,Bengaluru,Delivered
+ORD1034,Neha Singh,neha.singh@gmail.com,9012345678.0,Cotton T-Shirt,Fashion,4,599,2026-02-06,Kolkata,Shipped
+ORD1035,Vikram Rao,,9988123456.0,Water Bottle,Home & Kitchen,5,349,2026-02-07,Hyderabad,Processing
+ORD1036,Ananya Das,ananya.das@gmail.com,9876501234.0,Notebook Pack,Stationery,1,120,2026-02-08,Chennai,Cancelled
+ORD1037,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Laptop Stand,,2,1599,2026-02-09,Pune,
+ORD1038,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Coffee Mug,Home & Kitchen,3,299,2026-02-10,Jaipur,Shipped
+ORD1039,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Running Shoes,Fashion,4,3499,2026-02-11,Kochi,Processing
+ORD1040,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,LED Monitor,Electronics,5,12999,2026-02-12,Noida,Cancelled
+ORD1041,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Smart Watch,Electronics,five,6999,2026-02-13,Mumbai,Delivered
+ORD1042,Priya Verma,priya.verma@yahoo.com,9988776655.0,Air Fryer,Home Appliances,2,6999,2026-02-14,Delhi,Shipped
+ORD1043,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Gaming Chair,Furniture,3,10999,2026-02-15,Bengaluru,Processing
+ORD1044,Neha Singh,neha.singh@gmail.com,9012345678.0,Protein Powder,Fitness,4,3499,2026-02-16,Kolkata,Cancelled
+ORD1045,Vikram Rao,,9988123456.0,Digital Camera,Electronics,5,45999,2026-02-17,Hyderabad,Delivered
+ORD1046,Ananya Das,ananya.das@gmail.com,9876501234.0,Wireless Mouse,Electronics,1,799,2026-02-18,Chennai,Shipped
+ORD1047,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Bluetooth Speaker,Electronics,2,2499,2026-02-19,Pune,Processing
+ORD1048,Simran Kaur,simran.kaur@gmail.com,,Office Chair,Furniture,3,5999,2026-02-20,Jaipur,Cancelled
+ORD1049,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Cotton T-Shirt,Fashion,4,599,2026-02-21,Kochi,Delivered
+ORD1050,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Water Bottle,Home & Kitchen,5,349,2026-02-22,Noida,Shipped
+ORD1051,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Notebook Pack,Stationery,1,120,2026-02-23,Mumbai,Processing
+ORD1052,Priya Verma,priya.verma@yahoo.com,9988776655.0,Laptop Stand,Electronics,2,1599,2026-02-24,Delhi,Cancelled
+ORD1053,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Coffee Mug,Home & Kitchen,3,299,2026-02-25,Bengaluru,Delivered
+ORD1054,Neha Singh,neha.singh@gmail.com,9012345678.0,Running Shoes,Fashion,4,3499,2026-02-26,Kolkata,Shipped
+ORD1055,Vikram Rao,,9988123456.0,LED Monitor,,5,12999,2026-02-27,Hyderabad,Processing
+ORD1056,Ananya Das,ananya.das@gmail.com,9876501234.0,Smart Watch,Electronics,1,6999,2026-02-28,Chennai,Cancelled
+ORD1057,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Air Fryer,Home Appliances,2,6999,2026-03-01,Pune,Delivered
+ORD1058,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Gaming Chair,Furniture,3,10999,2026-03-02,Jaipur,Shipped
+ORD1059,Aditya Nair,,9812345678.0,Protein Powder,Fitness,4,3499,2026-03-03,Kochi,Processing
+ORD1060,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Digital Camera,Electronics,5,45999,2026-03-04,Noida,
+ORD1061,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Wireless Mouse,Electronics,1,799,2026-03-05,Mumbai,Delivered
+ORD1062,Priya Verma,priya.verma@yahoo.com,9988776655.0,Bluetooth Speaker,Electronics,2,2499,2026-03-06,Delhi,Shipped
+ORD1063,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Office Chair,Furniture,3,5999,2026-03-07,Bengaluru,Processing
+ORD1064,Neha Singh,neha.singh@gmail.com,9012345678.0,Cotton T-Shirt,Fashion,4,599,2026-03-08,Kolkata,Cancelled
+ORD1065,Vikram Rao,,9988123456.0,Water Bottle,Home & Kitchen,5,349,2026-03-09,Hyderabad,Delivered
+ORD1066,Ananya Das,ananya.das@gmail.com,9876501234.0,Notebook Pack,Stationery,1,120,2026-03-10,Chennai,Shipped
+ORD1067,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Laptop Stand,Electronics,2,free,2026-03-11,Pune,Processing
+ORD1068,Simran Kaur,simran.kaur@gmail.com,,Coffee Mug,Home & Kitchen,3,299,2026-03-12,Jaipur,Cancelled
+ORD1069,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Running Shoes,Fashion,4,3499,2026-03-13,Kochi,Delivered
+ORD1070,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,LED Monitor,Electronics,5,12999,2026-03-14,Noida,Shipped
+ORD1071,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Smart Watch,Electronics,1,6999,2026-03-15,Mumbai,Processing
+ORD1072,Priya Verma,priya.verma@yahoo.com,9988776655.0,Air Fryer,Home Appliances,2,6999,2026-03-16,Delhi,Cancelled
+ORD1073,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Gaming Chair,Furniture,3,10999,2026-03-17,Bengaluru,Delivered
+ORD1074,Neha Singh,neha.singh@gmail.com,9012345678.0,Protein Powder,Fitness,4,3499,2026-03-18,Kolkata,Shipped
+ORD1075,Vikram Rao,,9988123456.0,Digital Camera,Electronics,5,45999,2026-03-19,Hyderabad,Processing
+ORD1076,Ananya Das,ananya.das@gmail.com,9876501234.0,Wireless Mouse,Electronics,1,799,2026-03-20,Chennai,Cancelled
+ORD1077,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Bluetooth Speaker,Electronics,2,2499,2026-03-21,Pune,
+ORD1078,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Office Chair,Furniture,3,5999,2026-03-22,Jaipur,Shipped
+ORD1079,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Cotton T-Shirt,Fashion,4,599,2026-03-23,Kochi,Processing
+ORD1080,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Water Bottle,Home & Kitchen,5,349,2026-03-24,Noida,Cancelled
+ORD1081,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Notebook Pack,Stationery,1,120,2026-03-25,Mumbai,Delivered
+ORD1082,Priya Verma,priya.verma@yahoo.com,9988776655.0,Laptop Stand,Electronics,2,1599,2026-03-26,Delhi,Shipped
+ORD1083,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Coffee Mug,Home & Kitchen,3,299,2026-03-27,Bengaluru,Processing
+ORD1084,Neha Singh,neha.singh@gmail.com,9012345678.0,Running Shoes,Fashion,4,3499,2026-03-28,Kolkata,Cancelled
+ORD1085,Vikram Rao,,9988123456.0,LED Monitor,Electronics,5,12999,2026-01-01,Hyderabad,Delivered
+ORD1086,Ananya Das,ananya.das@gmail.com,9876501234.0,Smart Watch,Electronics,1,6999,2026-01-02,Chennai,Shipped
+ORD1087,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Air Fryer,Home Appliances,2,6999,2026-01-03,Pune,Processing
+ORD1088,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Gaming Chair,Furniture,3,10999,2026-01-04,Jaipur,Cancelled
+ORD1089,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Protein Powder,Fitness,4,3499,2026-01-05,Kochi,
+ORD1090,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Digital Camera,Electronics,5,45999,2026-01-06,Noida,Shipped
+ORD1091,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Wireless Mouse,Electronics,1,799,2026-01-07,Mumbai,Processing
+ORD1092,Priya Verma,priya.verma@yahoo.com,9988776655.0,Bluetooth Speaker,Electronics,2,2499,2026-01-08,Delhi,Cancelled
+ORD1093,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Office Chair,Furniture,3,5999,2026-01-09,Bengaluru,Delivered
+ORD1094,Neha Singh,neha.singh@gmail.com,9012345678.0,Cotton T-Shirt,Fashion,4,599,2026-01-10,Kolkata,Shipped
+ORD1095,Vikram Rao,,9988123456.0,Water Bottle,Home & Kitchen,5,349,2026-01-11,Hyderabad,Processing
+ORD1096,Ananya Das,ananya.das@gmail.com,9876501234.0,Notebook Pack,Stationery,1,120,2026-01-12,Chennai,Cancelled
+ORD1097,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Laptop Stand,Electronics,2,1599,2026-01-13,Pune,Delivered
+ORD1098,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Coffee Mug,Home & Kitchen,3,299,2026-01-14,Jaipur,Shipped
+ORD1099,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Running Shoes,Fashion,4,3499,2026-01-15,Kochi,Processing
+ORD1100,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,LED Monitor,Electronics,5,12999,2026-01-16,Noida,Cancelled
+ORD1101,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Smart Watch,Electronics,1,6999,2026-01-17,Mumbai,Delivered
+ORD1102,Priya Verma,priya.verma@yahoo.com,9988776655.0,Air Fryer,Home Appliances,2,6999,2026-01-18,Delhi,Shipped
+ORD1103,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Gaming Chair,Furniture,3,10999,2026-01-19,,Processing
+ORD1104,Neha Singh,neha.singh@gmail.com,9012345678.0,Protein Powder,Fitness,4,3499,2026-01-20,Kolkata,Cancelled
+ORD1105,Vikram Rao,,9988123456.0,Digital Camera,Electronics,5,45999,2026-01-21,Hyderabad,Delivered
+ORD1106,Ananya Das,ananya.das@gmail.com,,Wireless Mouse,Electronics,1,799,2026-01-22,Chennai,Shipped
+ORD1107,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Bluetooth Speaker,Electronics,2,2499,2026-01-23,Pune,Processing
+ORD1108,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Office Chair,Furniture,3,5999,2026-01-24,Jaipur,Cancelled
+ORD1109,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Cotton T-Shirt,Fashion,4,599,2026-01-25,Kochi,Delivered
+ORD1110,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Water Bottle,Home & Kitchen,5,349,2026-01-26,Noida,Shipped
+ORD1111,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Notebook Pack,Stationery,1,120,2026-01-27,Mumbai,Processing
+ORD1112,Priya Verma,priya.verma@yahoo.com,9988776655.0,Laptop Stand,Electronics,2,1599,2026-01-28,Delhi,
+ORD1113,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Coffee Mug,Home & Kitchen,3,299,2026-02-01,Bengaluru,Delivered
+ORD1114,Neha Singh,neha.singh@gmail.com,9012345678.0,Running Shoes,Fashion,4,3499,2026-02-02,Kolkata,Shipped
+ORD1115,Vikram Rao,,9988123456.0,LED Monitor,Electronics,5,12999,2026-02-03,Hyderabad,Processing
+ORD1116,Ananya Das,ananya.das@gmail.com,9876501234.0,Smart Watch,Electronics,1,6999,2026-02-04,Chennai,Cancelled
+ORD1117,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Air Fryer,Home Appliances,2,6999,2026-02-05,Pune,Delivered
+ORD1118,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Gaming Chair,Furniture,3,10999,2026-02-06,Jaipur,Shipped
+ORD1119,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Protein Powder,Fitness,4,3499,2026-02-07,Kochi,Processing
+ORD1120,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Digital Camera,Electronics,5,45999,2026-02-08,Noida,Cancelled
+ORD1121,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Wireless Mouse,Electronics,1,799,2026-02-09,Mumbai,Delivered
+ORD1122,Priya Verma,priya.verma@yahoo.com,9988776655.0,Bluetooth Speaker,,2,2499,2026-02-10,Delhi,Shipped
+ORD1123,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Office Chair,Furniture,3,5999,2026-02-11,Bengaluru,Processing
+ORD1124,Neha Singh,neha.singh@gmail.com,9012345678.0,Cotton T-Shirt,Fashion,4,599,2026-02-12,Kolkata,Cancelled
+ORD1125,Vikram Rao,,9988123456.0,Water Bottle,Home & Kitchen,5,349,2026-02-13,Hyderabad,Delivered
+ORD1126,Ananya Das,ananya.das@gmail.com,9876501234.0,Notebook Pack,Stationery,1,120,2026-02-14,Chennai,Shipped
+ORD1127,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Laptop Stand,Electronics,2,1599,2026-02-15,Pune,Processing
+ORD1128,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Coffee Mug,Home & Kitchen,3,299,2026-02-16,Jaipur,
+ORD1129,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Running Shoes,Fashion,4,3499,2026-02-17,Kochi,Delivered
+ORD1130,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,LED Monitor,Electronics,5,12999,2026-02-18,,Shipped
+ORD1131,Aarav Sharma,aarav.sharma@gmail.com,9876543210.0,Smart Watch,Electronics,1,6999,2026-02-19,Mumbai,Processing
+ORD1132,Priya Verma,priya.verma@yahoo.com,9988776655.0,Air Fryer,Home Appliances,2,6999,2026-02-20,Delhi,Cancelled
+ORD1133,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Gaming Chair,Furniture,3,10999,2026-02-21,Bengaluru,Delivered
+ORD1134,Neha Singh,neha.singh@gmail.com,9012345678.0,Protein Powder,Fitness,4,3499,2026-02-22,Kolkata,Shipped
+ORD1135,Vikram Rao,,9988123456.0,Digital Camera,Electronics,5,45999,2026-02-23,Hyderabad,Processing
+ORD1136,Ananya Das,ananya.das@gmail.com,9876501234.0,Wireless Mouse,Electronics,1,799,2026-02-24,Chennai,Cancelled
+ORD1137,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Bluetooth Speaker,Electronics,2,2499,2026-02-25,Pune,Delivered
+ORD1138,Simran Kaur,simran.kaur@gmail.com,9090909090.0,Office Chair,Furniture,3,5999,2026-02-26,Jaipur,Shipped
+ORD1139,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Cotton T-Shirt,Fashion,4,599,2026-02-27,,Processing
+ORD1140,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Water Bottle,Home & Kitchen,5,349,2026-02-28,Noida,Cancelled
+ORD1141,Aarav Sharma,,9876543210.0,Notebook Pack,Stationery,1,120,2026-03-01,Mumbai,Delivered
+ORD1142,Priya Verma,priya.verma@yahoo.com,9988776655.0,Laptop Stand,Electronics,2,1599,2026-03-02,Delhi,Shipped
+ORD1143,Rohan Gupta,rohan.gupta@gmail.com,9123456780.0,Coffee Mug,Home & Kitchen,3,299,2026-03-03,Bengaluru,Processing
+ORD1144,Neha Singh,neha.singh@gmail.com,9012345678.0,Running Shoes,Fashion,4,3499,2026-03-04,Kolkata,Cancelled
+ORD1145,Vikram Rao,,,LED Monitor,Electronics,5,12999,2026-03-05,Hyderabad,Delivered
+ORD1146,Ananya Das,ananya.das@gmail.com,9876501234.0,Smart Watch,Electronics,1,6999,2026-03-06,Chennai,Shipped
+ORD1147,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Air Fryer,Home Appliances,2,6999,2026-03-07,Pune,Processing
+ORD1148,Simran Kaur,simran.kaur@gmail.com,,Gaming Chair,Furniture,3,10999,2026-03-08,Jaipur,
+ORD1149,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Protein Powder,Fitness,4,3499,2026-03-09,Kochi,Delivered
+ORD1150,Sneha Kapoor,sneha.kapoor@gmail.com,9876123450.0,Digital Camera,Electronics,5,45999,2026-03-10,Noida,Shipped
+ORD1074,Neha Singh,neha.singh@gmail.com,9012345678.0,Protein Powder,Fitness,4,3499,2026-03-18,Kolkata,Shipped
+ORD1019,aarav sharma,aditya.nair@gmail.com,9812345678.0,Cotton T-Shirt,Fashion,4,599,2026-01-19,Kochi,Processing
+ORD1119,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Protein Powder,Fitness,4,3499,2026-02-07,Kochi,Processing
+ORD1079,Aditya Nair,aditya.nair@gmail.com,9812345678.0,Cotton T-Shirt,Fashion,4,599,2026-03-23,Kochi,Processing
+ORD1077,Karan Mehta,karan.mehta@gmail.com,9988771122.0,Bluetooth Speaker,Electronics,2,2499,2026-03-21,Pune,
+ORD1032,Priya Verma,priya.verma@yahoo.com,9988776655.0,Bluetooth Speaker,Electronics,2,2499,2026-02-04,Delhi,Cancelled
+ORD1065,Vikram Rao,,9988123456.0,Water Bottle,Home & Kitchen,5,349,2026-03-09,Hyderabad,Delivered
+ORD1142,Priya Verma,priya.verma@yahoo.com,9988776655.0,Laptop Stand,Electronics,2,1599,2026-03-02,Delhi,Shipped
