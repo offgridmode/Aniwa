@@ -170,31 +170,31 @@ pip install --upgrade aniwa
 Profile a dataset:
 
 ```bash
-aniwa customers.csv
+aniwa profile customers.csv
 ```
 
 Generate a JSON report:
 
 ```bash
-aniwa customers.csv --report json --output profile.json
+aniwa profile customers.csv --report json --output profile.json
 ```
 
 Generate an HTML report:
 
 ```bash
-aniwa customers.csv --report html --output profile.html
+aniwa profile customers.csv --report html --output profile.html
 ```
 
 Run lightweight profiling:
 
 ```bash
-aniwa customers.csv --mode fast
+aniwa profile customers.csv --mode fast
 ```
 
 Run full profiling:
 
 ```bash
-aniwa customers.csv --mode deep
+aniwa profile customers.csv --mode deep
 ```
 
 ---
@@ -238,7 +238,7 @@ sections:
 Use a custom config file:
 
 ```bash
-aniwa customers.csv --config config.yaml
+aniwa profile customers.csv --config config.yaml
 ```
 
 ---
@@ -258,13 +258,13 @@ Current sections include:
 Example:
 
 ```bash
-aniwa customers.csv --include summary,statistics
+aniwa profile customers.csv --include summary,statistics
 ```
 
 Exclude sections:
 
 ```bash
-aniwa customers.csv --exclude statistics
+aniwa profile customers.csv --exclude statistics
 ```
 
 ---
