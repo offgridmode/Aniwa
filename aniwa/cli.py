@@ -29,17 +29,19 @@ from aniwa.presets import apply_preset, list_presets, get_preset
 app = typer.Typer(help="Aniwa - Universal dataset profiling and intelligence.")
 console = Console()
 
+
 def version_callback(value: bool):
     """Display version and exit."""
     if value:
         from aniwa import __version__
-
         console.print(f"aniwa version {__version__}")
         raise typer.Exit()
 
 
-@app.callback()
+@app.callback(invoke_without_command=True)
 def main(
+    ctx: typer.Context,
+    path: str = typer.Argument(None, help="Path to dataset file (shortcut for 'profile' command)"),
     version: bool = typer.Option(
         False,
         "--version",
@@ -49,8 +51,28 @@ def main(
         is_eager=True,
     ),
 ):
-    """Aniwa - Universal dataset profiling and intelligence."""
-    pass
+    """
+    Aniwa - Universal dataset profiling and intelligence.
+    
+    If you provide a file path without a command, it will run the profile command automatically.
+    """
+    # If no subcommand is called but a path was provided, run profile
+    if ctx.invoked_subcommand is None and path:
+        # Call profile with only path, everything else uses defaults
+        profile(
+            path=path,
+            config_file=None,
+            preset=None,
+            report=None,
+            output=None,
+            output_dir=None,
+            mode=None,
+            include=None,
+            exclude=None,
+            template=None,
+            verbosity=VerbosityLevel.NORMAL,
+        )
+
 
 CONFIG_FILE_NAMES = (
     "aniwa.yaml",
