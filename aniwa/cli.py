@@ -10,7 +10,6 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
-from aniwa import __version__
 from aniwa.config_loader import get_flattened_config
 from aniwa.core.profiler import profile_dataframe
 from aniwa.io.readers import read_dataset
@@ -30,6 +29,28 @@ from aniwa.presets import apply_preset, list_presets, get_preset
 app = typer.Typer(help="Aniwa - Universal dataset profiling and intelligence.")
 console = Console()
 
+def version_callback(value: bool):
+    """Display version and exit."""
+    if value:
+        from aniwa import __version__
+
+        console.print(f"aniwa version {__version__}")
+        raise typer.Exit()
+
+
+@app.callback()
+def main(
+    version: bool = typer.Option(
+        False,
+        "--version",
+        "-V",
+        help="Show version and exit.",
+        callback=version_callback,
+        is_eager=True,
+    ),
+):
+    """Aniwa - Universal dataset profiling and intelligence."""
+    pass
 
 CONFIG_FILE_NAMES = (
     "aniwa.yaml",
@@ -282,6 +303,8 @@ def build_profile_metadata(
     verbosity: VerbosityLevel,
     preset: Optional[str] = None,
 ) -> ProfileMetadata:
+    from aniwa import __version__
+    
     include_sections = validate_sections(include)
     exclude_sections = validate_sections(exclude)
 
@@ -383,6 +406,9 @@ def profile(
     """
     # Configure logging first thing
     configure_logger(verbosity)
+
+    from aniwa import __version__
+
     logger = get_logger()
     
     # Log debug information
