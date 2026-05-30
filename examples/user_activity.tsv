@@ -1,0 +1,151 @@
+log_id	timestamp	user_id	country	device_type	session_duration_mins	purchase_amount	churn_risk	user_feedback	os_version
+L-90231	2026-05-01 08:00:00	USR-1409	Germany	Desktop	41.1	193.33	True	NULL	10.0
+L-90232	2026-05-01 08:45:00	USR-4257	France	Mobile	48.9	NULL	True	Satisfied with the quality, thanks.	11.0
+L-90233	2026-05-01 09:02:00	USR-2674	India	Mobile	NULL	364.36	False	Premium quality, highly recommend to everyone!	v14.2.1
+L-90234	2026-05-01 09:24:00	USR-6925	Singapore	Desktop	14.8	109.35	True	Slow loading times, fix it.	15.0
+L-90235	2026-05-01 09:20:00	USR-7065	Japan	Desktop	41.5	NULL	True	Excellent selection, but expensive.	16.0
+L-90236	2026-05-01 10:15:00	USR-4598	Japan	Desktop	twelve	411.43	False	Very intuitive, love it.	16.0
+L-90236	2026-05-01 10:15:00	USR-4598	Japan	Desktop	twelve	411.43	False	Very intuitive, love it.	16.0
+L-90238	2026-05-01 10:13:00	USR-3621	Brazil	Tablet	NULL	240.92	True	Just browsing, looks okay.	15.0
+L-90239	2026-05-01 12:08:00	USR-2827	Germany	Mobile	error_time	228.26	True	Just browsing, looks okay.	15.0
+L-90240	2026-05-01 14:18:00	USR-4258	Canada	Mobile	47.0	error	False	NULL	15.0
+L-90241	2026-05-01 12:10:00	USR-1949	United Kingdom	Tablet	29.9	NULL	True	NULL	11.0
+L-90242	2026-05-01 12:46:00	USR-9645	Singapore	Mobile	45.7	183.15	False	It's fine, does the job.	11.0
+L-90243	2026-05-01 12:48:00	USR-2049	Japan	Desktop	14.4	NULL	True	App crashed, very frustrated!	10.0
+L-90244	2026-05-01 17:06:00	USR-4899	Germany	Tablet	43.8	113.88	False	Won't open, deleting immediately.	v14.2.1
+L-90245	2026-05-01 16:38:00	USR-6804	Brazil	Mobile	40.9	184.76	False	Just browsing, looks okay.	11.0
+L-90246	2026-05-01 19:00:00	USR-8350	Canada	Mobile	52.7	NULL	True	NULL	10.0
+L-90247	2026-05-01 12:00:00	USR-4872	Canada	Mobile	25.0	NULL	False	NULL	16.0
+L-90248	2026-05-01 15:56:00	USR-7930	France	Tablet	18.9	246.73	False	NULL	11.0
+L-90249	2026-05-01 11:54:00	USR-9320	India	Desktop	NULL	NULL	True	Amazing support, solved my issue instantly.	10.0
+L-90250	2026-05-01 12:45:00	USR-7868	Singapore	Tablet	13.4	181.72	False	Love the new interface, smooth and fast.	v14.2.1
+L-90251	2026-05-01 13:20:00	USR-2200	France	Desktop	21.9	NULL	True	Delivery was fast, items intact.	15.0
+L-90252	2026-05-01 23:03:00	USR-1128	France	Mobile	52.9	335.63	True	Decent, but shipping took long.	15.0
+L-90253	2026-05-01 16:26:00	USR-5325	France	Mobile	4.5	25.56	False	Quick re-check, still liking it.	11.0
+L-90254	2026-05-01 22:34:00	USR-8007	France	Desktop	NULL	72.17	True	Amazing support, solved my issue instantly.	16.0
+L-90255	2026-05-01 15:12:00	USR-1685	Germany	Mobile	51.9	116.78	True	Broken links everywhere, useless.	16.0
+L-90256	2026-05-01 15:55:00	USR-4878	Canada	Desktop	error_time	188.79	True	Just browsing, looks okay.	10.0
+L-90256	2026-05-01 15:55:00	USR-4878	Canada	Desktop	error_time	188.79	True	Just browsing, looks okay.	10.0
+L-90258	2026-05-01 22:24:00	USR-9346	Brazil	Tablet	56.4	NULL	False	Back again, checking orders.	v14.2.1
+L-90259	2026-05-02 01:16:00	USR-6663	Japan	Mobile	24.0	320.7	True	Broken links everywhere, useless.	11.0
+L-90260	2026-05-01 23:57:00	USR-8066	India	Tablet	40.3	NULL	False	Nice updates, looks cleaner.	16.0
+L-90261	2026-05-01 22:00:00	USR-3085	United Kingdom	Mobile	45.3	NULL	False	Great service, will buy again.	11.0
+L-90262	2026-05-02 03:07:00	USR-6279	Australia	Mobile	29.2	81.33	True	Nice updates, looks cleaner.	15.0
+L-90263	2026-05-01 16:00:00	USR-4848	Germany	Desktop	4.2	347.21	False	Quick re-check, still liking it.	16.0
+L-90264	2026-05-02 06:33:00	USR-7547	United Kingdom	Desktop	forty	363.02	False	NULL	10.0
+L-90265	2026-05-02 06:06:00	USR-3184	Australia	Tablet	20.1	367.86	False	Broken links everywhere, useless.	11.0
+L-90266	2026-05-02 07:20:00	USR-8373	Germany	Desktop	47.0	201.3	False	Satisfied with the quality, thanks.	10.0
+L-90267	2026-05-01 18:48:00	USR-3471	United Kingdom	Mobile	5.3	190.6	True	Premium quality, highly recommend to everyone!	10.0
+L-90268	2026-05-02 04:58:00	USR-8814	United States	Mobile	53.7	332.17	True	Back again, checking orders.	10.0
+L-90269	2026-05-02 05:32:00	USR-6507	Brazil	Tablet	9.0	error	True	NULL	16.0
+L-90270	2026-05-01 21:39:00	USR-1823	Germany	Mobile	21.2	428.33	False	Love the new interface, smooth and fast.	10.0
+L-90271	2026-05-02 05:20:00	USR-4673	India	Tablet	NULL	NULL	True	Great service, will buy again.	11.0
+L-90272	2026-05-01 20:18:00	USR-8758	India	Tablet	16.5	433.9	True	Delivery was fast, items intact.	10.0
+L-90273	2026-05-01 15:42:00	USR-6111	Singapore	Tablet	56.6	NULL	True	NULL	10.0
+L-90274	2026-05-01 16:36:00	USR-6688	France	Mobile	39.4	NULL	False	Just browsing, looks okay.	15.0
+L-90275	2026-05-02 12:36:00	USR-3506	Brazil	Desktop	17.3	220.67	False	Amazing support, solved my issue instantly.	11.0
+L-90276	2026-05-01 19:15:00	USR-5569	Australia	Desktop	40.6	150.3	False	Back again, checking orders.	15.0
+L-90277	2026-05-02 18:30:00	USR-1166	France	Desktop	NULL	342.62	False	Very intuitive, love it.	10.0
+L-90278	2026-05-01 19:45:00	USR-5820	United Kingdom	Mobile	35.5	194.92	False	Slow loading times, fix it.	15.0
+L-90279	2026-05-02 03:12:00	USR-2976	United Kingdom	Mobile	NULL	88.2	True	Back again, checking orders.	15.0
+L-90280	2026-05-01 21:04:00	USR-4180	Germany	Desktop	42.9	NULL	True	Broken links everywhere, useless.	11.0
+L-90281	2026-05-02 18:10:00	USR-2680	United States	Tablet	21.4	388.6	True	Premium quality, highly recommend to everyone!	10.0
+L-90282	2026-05-02 00:09:00	USR-3444	Singapore	Mobile	NULL	NULL	False	Decent, but shipping took long.	16.0
+L-90283	2026-05-02 16:56:00	USR-8253	Germany	Tablet	37.8	426.73	True	Back again, checking orders.	11.0
+L-90284	2026-05-02 06:05:00	USR-3847	France	Desktop	41.8	error	False	Slow loading times, fix it.	v14.2.1
+L-90285	2026-05-02 05:36:00	USR-5334	Singapore	Tablet	8.2	NULL	True	Too many ads, annoying.	v14.2.1
+L-90286	2026-05-02 02:20:00	USR-6039	Singapore	Tablet	27.2	184.71	False	Very intuitive, love it.	10.0
+L-90287	2026-05-02 18:32:00	USR-6280	Singapore	Mobile	NULL	NULL	True	Nice updates, looks cleaner.	10.0
+L-90288	2026-05-02 03:57:00	USR-8708	France	Tablet	59.8	436.26	False	Satisfied with the quality, thanks.	10.0
+L-90289	2026-05-02 03:20:00	USR-6403	Brazil	Tablet	24.9	FREE	False	Just browsing, looks okay.	16.0
+L-90290	2026-05-03 01:18:00	USR-1018	France	Mobile	22.7	343.43	True	Too many ads, annoying.	16.0
+L-90291	2026-05-03 01:00:00	USR-2989	United States	Tablet	10.8	47.38	True	Just browsing, looks okay.	11.0
+L-90291	2026-05-03 01:00:00	USR-2989	United States	Tablet	10.8	47.38	True	Just browsing, looks okay.	11.0
+L-90293	2026-05-01 22:28:00	USR-5526	Brazil	Mobile	49.5	266.6	False	Slow loading times, fix it.	15.0
+L-90294	2026-05-02 16:33:00	USR-9903	Brazil	Mobile	58.9	NULL	False	Standard service, nothing special.	v14.2.1
+L-90295	2026-05-03 02:40:00	USR-7246	Brazil	Tablet	10.4	434.62	False	Slow loading times, fix it.	v14.2.1
+L-90296	2026-05-03 02:15:00	USR-1251	Canada	Mobile	5.9	282.72	False	Satisfied with the quality, thanks.	16.0
+L-90297	2026-05-02 17:00:00	USR-8994	France	Desktop	41.5	46.12	True	Just browsing, looks okay.	15.0
+L-90298	2026-05-01 20:17:00	USR-1753	Japan	Desktop	10.0	357.88	True	Decent, but shipping took long.	11.0
+L-90299	2026-05-03 06:28:00	USR-3344	United Kingdom	Mobile	40.5	133.7	True	NULL	15.0
+L-90300	2026-05-03 02:33:00	USR-5097	Australia	Mobile	29.8	NULL	False	Good, cheap options.	v14.2.1
+L-90301	2026-05-03 00:50:00	USR-5497	United States	Tablet	58.5	375.78	False	Excellent selection, but expensive.	15.0
+L-90302	2026-05-02 12:24:00	USR-4115	Singapore	Mobile	40.1	407.11	True	Slow loading times, fix it.	v14.2.1
+L-90303	2026-05-02 23:36:00	USR-3153	India	Mobile	13.2	168.43	False	Back again, checking orders.	16.0
+L-90304	2026-05-02 18:04:00	USR-6549	India	Mobile	58.0	441.09	False	NULL	15.0
+L-90305	2026-05-03 14:16:00	USR-3024	Australia	Mobile	35.7	54.1	True	Decent, but shipping took long.	15.0
+L-90306	2026-05-02 14:00:00	USR-2035	Australia	Tablet	9.7	224.72	True	Broken links everywhere, useless.	16.0
+L-90307	2026-05-03 01:48:00	USR-9850	Brazil	Tablet	25.8	NULL	False	Back again, checking orders.	v14.2.1
+L-90308	2026-05-03 02:21:00	USR-4559	Australia	Mobile	7.3	440.16	False	NULL	10.0
+L-90309	2026-05-03 10:42:00	USR-2501	United Kingdom	Tablet	4.5	355.42	True	NULL	11.0
+L-90310	2026-05-02 14:17:00	USR-4817	Japan	Desktop	17.7	245.85	True	NULL	11.0
+L-90311	2026-05-01 21:20:00	USR-6869	United Kingdom	Tablet	4.6	337.07	False	Confusing layout, couldn't find search.	10.0
+L-90312	2026-05-03 11:18:00	USR-9254	United Kingdom	Tablet	NULL	237.52	False	Great service, will buy again.	v14.2.1
+L-90313	2026-05-03 14:40:00	USR-7580	Brazil	Tablet	NULL	405.27	False	Love the new interface, smooth and fast.	15.0
+L-90314	2026-05-03 07:02:00	USR-9692	Germany	Mobile	47.9	NULL	True	Excellent selection, but expensive.	16.0
+L-90315	2026-05-03 09:00:00	USR-7815	India	Mobile	23.4	NULL	False	NULL	10.0
+L-90316	2026-05-03 12:25:00	USR-2582	Japan	Desktop	34.4	162.99	False	App crashed, very frustrated!	15.0
+L-90317	2026-05-03 05:52:00	USR-2697	Singapore	Tablet	14.6	NULL	False	NULL	11.0
+L-90318	2026-05-03 13:39:00	USR-1430	Singapore	Tablet	12.1	156.88	True	Too many ads, annoying.	16.0
+L-90319	2026-05-02 04:32:00	USR-3324	United States	Desktop	26.1	326.39	True	Too many ads, annoying.	10.0
+L-90320	2026-05-02 06:15:00	USR-5458	Australia	Tablet	25.7	NULL	True	Just browsing, looks okay.	16.0
+L-90321	2026-05-04 00:30:00	USR-6053	United States	Desktop	1.9	66.92	False	Just browsing, looks okay.	v14.2.1
+L-90322	2026-05-03 16:07:00	USR-3878	Canada	Mobile	34.2	182.29	True	Slow loading times, fix it.	15.0
+L-90323	2026-05-03 16:44:00	USR-7626	Brazil	Mobile	NULL	NULL	False	Decent, but shipping took long.	15.0
+L-90324	2026-05-02 07:15:00	USR-8155	India	Desktop	6.1	104.37	True	NULL	11.0
+L-90325	2026-05-03 10:08:00	USR-6752	Canada	Desktop	NULL	73.87	True	Quick re-check, still liking it.	16.0
+L-90326	2026-05-03 07:30:00	USR-6179	Canada	Mobile	NULL	127.95	True	Love the new interface, smooth and fast.	16.0
+L-90327	2026-05-02 03:12:00	USR-1932	Japan	Mobile	NULL	279.06	False	Broken links everywhere, useless.	10.0
+L-90328	2026-05-03 21:26:00	USR-4084	Japan	Tablet	5.1	NULL	False	Love the new interface, smooth and fast.	11.0
+L-90329	2026-05-02 03:36:00	USR-5059	Australia	Mobile	22.8	349.86	True	Quick re-check, still liking it.	15.0
+L-90330	2026-05-02 10:24:00	USR-7333	Germany	Mobile	54.5	264.73	True	Good, cheap options.	16.0
+L-90331	2026-05-02 14:00:00	USR-2388	Germany	Tablet	49.1	334.01	True	Standard service, nothing special.	10.0
+L-90332	2026-05-03 15:33:00	USR-6060	Canada	Desktop	12.7	137.32	True	Broken links everywhere, useless.	10.0
+L-90333	2026-05-03 12:42:00	USR-3147	Singapore	Mobile	42.0	326.2	True	Nice updates, looks cleaner.	16.0
+L-90334	2026-05-03 08:04:00	USR-8355	United Kingdom	Tablet	47.4	307.17	False	Good, cheap options.	16.0
+L-90335	2026-05-02 18:40:00	USR-4271	Singapore	Desktop	29.6	321.86	True	Delivery was fast, items intact.	11.0
+L-90336	2026-05-04 00:45:00	USR-2502	United Kingdom	Mobile	25.8	177.45	True	Great service, will buy again.	10.0
+L-90337	2026-05-03 14:46:00	USR-3392	Canada	Desktop	42.2	NULL	False	Great service, will buy again.	10.0
+L-90338	2026-05-03 06:22:00	USR-4533	Canada	Tablet	26.3	60.09	True	Decent, but shipping took long.	10.0
+L-90339	2026-05-04 09:48:00	USR-9782	United States	Tablet	9.9	112.8	False	Nice updates, looks cleaner.	v14.2.1
+L-90340	2026-05-03 19:57:00	USR-2108	France	Tablet	33.9	288.23	False	Great service, will buy again.	10.0
+L-90341	2026-05-03 18:40:00	USR-4950	India	Tablet	4.1	83.73	False	Very intuitive, love it.	11.0
+L-90341	2026-05-03 18:40:00	USR-4950	India	Tablet	4.1	83.73	False	Very intuitive, love it.	11.0
+L-90343	2026-05-02 08:16:00	USR-6438	Germany	Desktop	24.9	156.53	True	Very intuitive, love it.	15.0
+L-90344	2026-05-02 12:15:00	USR-7955	India	Mobile	33.4	299.44	False	Standard service, nothing special.	16.0
+L-90345	2026-05-03 20:48:00	USR-8325	United States	Tablet	59.9	426.87	True	Premium quality, highly recommend to everyone!	11.0
+L-90346	2026-05-02 05:05:00	USR-3339	Singapore	Tablet	forty	NULL	False	Amazing support, solved my issue instantly.	v14.2.1
+L-90347	2026-05-02 20:44:00	USR-8371	Japan	Mobile	9.6	129.73	True	NULL	16.0
+L-90348	2026-05-04 23:45:00	USR-2929	Germany	Mobile	37.3	94.87	True	Slow loading times, fix it.	16.0
+L-90349	2026-05-02 13:30:00	USR-6236	Japan	Tablet	NULL	384.0	True	It's fine, does the job.	11.0
+L-90350	2026-05-02 19:42:00	USR-4878	Australia	Desktop	28.8	398.6	True	Very intuitive, love it.	16.0
+L-90351	2026-05-02 12:00:00	USR-3053	Japan	Tablet	NULL	62.97	True	Too many ads, annoying.	10.0
+L-90352	2026-05-02 18:17:00	USR-9488	Canada	Mobile	43.0	403.35	True	Quick re-check, still liking it.	15.0
+L-90353	2026-05-02 20:36:00	USR-5961	Singapore	Tablet	NULL	263.8	True	Decent, but shipping took long.	10.0
+L-90354	2026-05-02 06:33:00	USR-2330	United States	Tablet	13.8	19.44	False	Good, cheap options.	16.0
+L-90355	2026-05-03 19:56:00	USR-8430	India	Tablet	NULL	96.58	True	Satisfied with the quality, thanks.	15.0
+L-90356	2026-05-04 08:55:00	USR-3142	Japan	Tablet	28.8	48.98	False	Decent, but shipping took long.	11.0
+L-90357	2026-05-03 23:00:00	USR-6123	United Kingdom	Desktop	30.7	error	False	Won't open, deleting immediately.	10.0
+L-90358	2026-05-02 11:31:00	USR-5609	Australia	Tablet	29.0	197.33	False	Premium quality, highly recommend to everyone!	16.0
+L-90359	2026-05-02 11:44:00	USR-4189	Japan	Tablet	27.8	282.72	True	NULL	v14.2.1
+L-90360	2026-05-04 06:57:00	USR-6555	France	Mobile	31.3	FREE	False	It's fine, does the job.	11.0
+L-90361	2026-05-04 01:00:00	USR-6218	Canada	Mobile	19.0	242.35	False	Great service, will buy again.	10.0
+L-90362	2026-05-04 14:36:00	USR-6040	United States	Tablet	47.3	326.3	False	Quick re-check, still liking it.	16.0
+L-90363	2026-05-03 01:48:00	USR-4968	United States	Tablet	2.6	312.58	False	Decent, but shipping took long.	10.0
+L-90364	2026-05-02 23:54:00	USR-9498	United Kingdom	Tablet	32.2	410.98	False	Nice updates, looks cleaner.	15.0
+L-90365	2026-05-05 01:20:00	USR-4150	United Kingdom	Mobile	58.4	98.02	False	Confusing layout, couldn't find search.	15.0
+L-90366	2026-05-03 23:00:00	USR-2996	Singapore	Tablet	24.6	71.03	True	Love the new interface, smooth and fast.	16.0
+L-90367	2026-05-03 18:56:00	USR-8849	United Kingdom	Desktop	34.4	334.95	True	Nice updates, looks cleaner.	11.0
+L-90368	2026-05-03 14:48:00	USR-1860	India	Mobile	41.3	NULL	True	Very intuitive, love it.	11.0
+L-90369	2026-05-04 00:24:00	USR-6262	Germany	Tablet	NULL	109.1	True	Delivery was fast, items intact.	11.0
+L-90370	2026-05-02 11:48:00	USR-7504	Australia	Desktop	55.7	pending	True	Satisfied with the quality, thanks.	16.0
+L-90371	2026-05-03 02:00:00	USR-9261	Australia	Mobile	11.0	88.66	False	Amazing support, solved my issue instantly.	11.0
+L-90372	2026-05-03 09:21:00	USR-7643	Brazil	Tablet	7.1	421.51	True	Excellent selection, but expensive.	15.0
+L-90373	2026-05-04 09:22:00	USR-5947	Singapore	Tablet	22.5	NULL	True	Delivery was fast, items intact.	15.0
+L-90374	2026-05-03 00:31:00	USR-5833	Japan	Tablet	29.5	171.88	False	Nice updates, looks cleaner.	11.0
+L-90375	2026-05-02 20:00:00	USR-9609	Australia	Tablet	34.5	NULL	True	Too many ads, annoying.	16.0
+L-90376	2026-05-03 01:05:00	USR-4365	Singapore	Mobile	NULL	207.32	False	App crashed, very frustrated!	15.0
+L-90377	2026-05-02 10:46:00	USR-7487	Germany	Desktop	4.1	447.39	True	Very intuitive, love it.	v14.2.1
+L-90378	2026-05-05 00:12:00	USR-3948	Canada	Tablet	26.1	392.11	False	Nice updates, looks cleaner.	11.0
+L-90379	2026-05-04 14:56:00	USR-2943	Canada	Tablet	58.8	440.45	False	Broken links everywhere, useless.	16.0
+
