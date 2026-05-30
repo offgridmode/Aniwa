@@ -17,13 +17,13 @@ pip install aniwa
 ## Quick Start
 
 ```bash
-aniwa customers.csv
+aniwa profile customers.csv
 ```
 
 Generate HTML report:
 
 ```bash
-aniwa customers.csv --report html
+aniwa profile customers.csv --report html
 ```
 
 ---
